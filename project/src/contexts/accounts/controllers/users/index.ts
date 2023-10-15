@@ -15,7 +15,7 @@ export class UserController {
   async store(req: Request, res: Response) {
     const data = RegisterUserSchema.parse(req.body)
     return res.status(200).json({
-      data,
+      data: await db.User.operations.create(data),
     })
   }
 }
