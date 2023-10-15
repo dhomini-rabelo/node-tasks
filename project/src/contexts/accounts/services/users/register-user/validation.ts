@@ -1,6 +1,8 @@
 import { IUserParams } from '../../../../../application/db/schemas/users'
 import { RegisterUserSchema } from '../../../controllers/users/schemas'
 import { db } from '../../../../../core/db'
+import { ValidationError } from '../../../../../application/http/middlewares/error/exceptions/ValidationError'
+import { ErrorMessages } from '../../../../../application/http/error/messages'
 
 export class ValidateUserDataService {
   async run(inputData: any | IUserParams): Promise<IUserParams> {
@@ -14,7 +16,9 @@ export class ValidateUserDataService {
       username: data.username,
     }))
     if (duplicatedUsernameError) {
-      throw new Error('Username duplicated!')
+      throw new ValidationError({
+        username: [ErrorMessages.DUPLICATED_VALUE],
+      })
     }
   }
 }
