@@ -2,7 +2,7 @@ import * as zod from 'zod'
 import {
   DynamicErrors,
   ErrorMessages,
-} from '../../../application/http/error/messages'
+} from '../../../../application/http/error/messages'
 
 export const RegisterUserSchema = zod
   .object({
