@@ -13,8 +13,18 @@ export const RegisterUserSchema = zod
       })
       .min(4, DynamicErrors.minLength(3))
       .max(64, DynamicErrors.maxLength(64)),
-    password: zod.string().min(8, DynamicErrors.minLength(8)),
-    confirm_password: zod.string().min(1, ErrorMessages.REQUIRED),
+    password: zod
+      .string({
+        required_error: ErrorMessages.REQUIRED,
+        invalid_type_error: ErrorMessages.INVALID_VALUE,
+      })
+      .min(8, DynamicErrors.minLength(8)),
+    confirm_password: zod
+      .string({
+        required_error: ErrorMessages.REQUIRED,
+        invalid_type_error: ErrorMessages.INVALID_VALUE,
+      })
+      .min(1, ErrorMessages.REQUIRED),
   })
   .refine((data) => data.password === data.confirm_password, {
     message: 'As senhas são diferentes',
