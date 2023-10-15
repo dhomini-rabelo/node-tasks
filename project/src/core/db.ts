@@ -1,6 +1,6 @@
 import { MongooseUserOperations } from '../application/db/repositories/users/cases/mongoose/operations'
 import { MongooseUserRepository } from '../application/db/repositories/users/cases/mongoose/repository'
-import { IUserModel } from '../application/db/repositories/users/interface'
+import { IUserModel } from '../application/db/repositories/users/interfaces'
 
 const userModel: IUserModel = {
   documents: new MongooseUserRepository(),

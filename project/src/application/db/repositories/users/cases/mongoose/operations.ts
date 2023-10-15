@@ -1,6 +1,6 @@
 import { UserModel } from '../../../../mongoose-models/users'
 import { IUser } from '../../../../schemas/users'
-import { IUserOperations } from '../../interface'
+import { IUserOperations } from '../../interfaces'
 
 export class MongooseUserOperations implements IUserOperations {
   async create(data: Omit<IUser, '_id'>) {

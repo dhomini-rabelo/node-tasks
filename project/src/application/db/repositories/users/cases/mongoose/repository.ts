@@ -1,5 +1,5 @@
 import { UserModel } from '../../../../mongoose-models/users'
-import { IUserRepository } from '../../interface'
+import { IUserRepository } from '../../interfaces'
 
 export class MongooseUserRepository implements IUserRepository {
   all() {
