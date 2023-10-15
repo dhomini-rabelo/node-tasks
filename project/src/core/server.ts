@@ -1,5 +1,6 @@
 import express from 'express'
 import { env } from './env'
+import mongoose from 'mongoose'
 
 const app = express()
 
@@ -11,6 +12,13 @@ app.get('/', function (req, res) {
   })
 })
 
-app.listen(env.PORT, () => {
-  console.log('Server running')
-})
+mongoose
+  .connect(env.MONGO_URL, {})
+  .then(() => {
+    app.listen(env.PORT, () => {
+      console.log('Server running')
+    })
+  })
+  .catch((error) => {
+    console.error('MongooseConnectionError', error)
+  })
