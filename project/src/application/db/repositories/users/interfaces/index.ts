@@ -1,11 +1,13 @@
-import { IUser } from '../../../schemas/users'
+import { IUser, IUserParams } from '../../../schemas/users'
 
 export interface IUserOperations {
-  create: (data: Omit<IUser, '_id'>) => Promise<IUser>
+  create: (data: IUserParams) => Promise<IUser>
 }
 
 export interface IUserRepository {
   all: () => Promise<IUser[]>
+  find: (params: Partial<IUser>) => Promise<IUser[]>
+  findOne: (params: Partial<IUser>) => Promise<IUser | null>
 }
 
 export interface IUserModel {
