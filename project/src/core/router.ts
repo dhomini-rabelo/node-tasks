@@ -1,3 +1,3 @@
-import { PublicRouter } from '../application/http/router/cases/public'
+import { PublicRouter } from '../application/http/router/public'
 
 export const publicRouter = new PublicRouter()
