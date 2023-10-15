@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { publicRouter } from '../../../../core/router'
 import { db } from '../../../../core/db'
-import { RegisterUserSchema } from './schemas'
+import { CreateUserMediator } from '../../services/users/register-user/mediator'
 
 export class UserController {
   @publicRouter.get('/users')
@@ -13,9 +13,9 @@ export class UserController {
 
   @publicRouter.post('/users')
   async store(req: Request, res: Response) {
-    const data = RegisterUserSchema.parse(req.body)
+    const service = new CreateUserMediator()
     return res.status(200).json({
-      data: await db.User.operations.create(data),
+      data: await service.run(req.body),
     })
   }
 }
