@@ -12,7 +12,7 @@ export class ValidateUserDataService {
   }
 
   async validateDatabaseRules(data: IUserParams) {
-    const duplicatedUsernameError = !!(await db.User.documents.find({
+    const duplicatedUsernameError = !!(await db.User.documents.findOne({
       username: data.username,
     }))
     if (duplicatedUsernameError) {
