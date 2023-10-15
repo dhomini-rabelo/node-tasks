@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express'
 import { env } from '../../../../core/env'
 import { ZodError } from 'zod'
 import { formatZodError } from './format'
+import { ValidationError } from './exceptions/ValidationError'
 
 export function errorMiddleware(
   err: Error,
@@ -19,6 +20,9 @@ export function errorMiddleware(
   if (err instanceof ZodError) {
     response.status = 400
     response.payload = formatZodError(err.format())
+  } else if (err instanceof ValidationError) {
+    response.status = 400
+    response.payload = err.errors
   }
   return res.status(response.status).json(response.payload)
 }
