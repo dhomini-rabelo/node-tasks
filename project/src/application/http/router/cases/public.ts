@@ -15,13 +15,11 @@ export class PublicRouter {
   }
 
   get(path: string) {
-    console.log('a')
     return (
       target: any,
       propertyKey: string,
       descriptor: PropertyDescriptor,
     ) => {
-      console.log('b', path, descriptor.value)
       this.router.get(path, this.wrapper(descriptor.value))
     }
   }

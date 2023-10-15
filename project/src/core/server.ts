@@ -1,16 +1,14 @@
 import express from 'express'
 import { env } from './env'
 import mongoose from 'mongoose'
+import { publicRouter } from './router'
+import './routes'
 
 const app = express()
 
 app.use(express.json())
 
-app.get('/', function (req, res) {
-  return res.status(200).json({
-    Hello: 'World',
-  })
-})
+app.use('/', publicRouter.router)
 
 mongoose
   .connect(env.MONGO_URL, {})
@@ -20,5 +18,5 @@ mongoose
     })
   })
   .catch((error) => {
-    console.error('MongooseConnectionError', error)
+    console.error('MongooseConnectionError: ', error)
   })
