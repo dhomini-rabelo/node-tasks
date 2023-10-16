@@ -1,1 +1,1 @@
-import './controllers/users'
+import './controllers/user'
