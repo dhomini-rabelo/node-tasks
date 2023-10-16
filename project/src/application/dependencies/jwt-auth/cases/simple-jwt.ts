@@ -6,6 +6,10 @@ export type ISettings = {
   SECRET_KEY: string
 }
 
+type ITokenBody = {
+  userId: string
+}
+
 export class SimpleJWTModule implements IJWTModule {
   constructor(
     private settings: ISettings,
@@ -13,7 +17,7 @@ export class SimpleJWTModule implements IJWTModule {
 
   generateToken(userId: string) {
     return jwt.sign({ userId }, this.settings.SECRET_KEY, {
-      expiresIn: 30,
+      expiresIn: this.settings.expiresIn,
     })
   }
 
@@ -23,5 +27,10 @@ export class SimpleJWTModule implements IJWTModule {
     } catch {
       return false
     }
+  }
+
+  getUserId(token: string) {
+    const tokenBody = jwt.verify(token, this.settings.SECRET_KEY) as ITokenBody
+    return tokenBody.userId
   }
 }
