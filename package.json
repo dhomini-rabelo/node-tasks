@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "require-dir": "^1.2.0"
+  },
+  "devDependencies": {
+    "@types/require-dir": "^1.0.2"
+  }
+}

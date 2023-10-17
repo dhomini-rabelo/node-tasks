@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { publicRouter } from '../../../core/router'
+import { publicRouter } from '../../../core/routes/routers'
 import { JWTModule } from '../../../core/dependencies/modules'
 
 export class AuthController {

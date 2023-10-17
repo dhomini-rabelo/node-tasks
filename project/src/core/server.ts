@@ -1,9 +1,9 @@
 import express from 'express'
 import { env } from './dependencies/env'
 import mongoose from 'mongoose'
-import { publicRouter } from './router'
+import { publicRouter } from './routes/routers'
 import { errorMiddleware } from '../application/http/middlewares/error'
-import './routes'
+import './routes/routes'
 
 const app = express()
 

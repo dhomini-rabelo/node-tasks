@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { publicRouter } from '../../../core/router'
+import { publicRouter } from '../../../core/routes/routers'
 import { db } from '../../../core/dependencies/db'
 import { CreateUserMediator } from '../services/users/register-user/mediator'
 
