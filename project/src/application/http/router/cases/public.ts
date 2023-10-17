@@ -1,5 +1,5 @@
 import express from 'express'
-import { BaseRouter } from './base'
+import { BaseRouter } from '../base'
 
 export class PublicRouter extends BaseRouter {
   public readonly router = express.Router()

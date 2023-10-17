@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
-import { IRoute } from './types'
+
+export type IRoute = (req: Request, res: Response, next: NextFunction) => any
 
 export abstract class BaseRouter {
   wrapper(routeHandler: IRoute) {
