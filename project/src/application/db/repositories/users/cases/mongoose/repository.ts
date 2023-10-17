@@ -1,4 +1,4 @@
-import { UserModel } from '../../../../mongoose-models/users'
+import { UserModel } from '../../../../models/mongoose/users'
 import { IUser } from '../../../../schemas/users'
 import { IUserRepository } from '../../interfaces'
 
