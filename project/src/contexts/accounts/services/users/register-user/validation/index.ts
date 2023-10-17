@@ -1,6 +1,6 @@
 import { IUserParams } from '../../../../../../application/db/schemas/users'
 import { RegisterUserSchema } from './schemas'
-import { db } from '../../../../../../core/db'
+import { db } from '../../../../../../core/dependencies/db'
 import { ValidationError } from '../../../../../../application/http/middlewares/error/exceptions/ValidationError'
 import { ErrorMessages } from '../../../../../../application/http/error/messages'
 

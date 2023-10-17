@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import { env } from '../../../../core/env'
+import { env } from '../../../../core/dependencies/env'
 import { ZodError } from 'zod'
 import { formatZodError } from './format'
 import { ValidationError } from './exceptions/ValidationError'

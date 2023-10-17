@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { publicRouter } from '../../../core/router'
-import { JWTModule } from '../../../core/dependencies'
+import { JWTModule } from '../../../core/dependencies/modules'
 
 export class AuthController {
   @publicRouter.post('/get-token')

@@ -1,6 +1,6 @@
 import { IUser, IUserParams } from '../../../../../application/db/schemas/users'
-import { db } from '../../../../../core/db'
-import { HashModule } from '../../../../../core/dependencies'
+import { db } from '../../../../../core/dependencies/db'
+import { HashModule } from '../../../../../core/dependencies/modules'
 
 export class CreateUserService {
   async run(validData: IUserParams): Promise<IUser> {
