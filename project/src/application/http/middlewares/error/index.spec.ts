@@ -1,4 +1,4 @@
-import express, { NextFunction, Request, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import supertest from 'supertest'
 import { describe, expect, it } from 'vitest'
 import { randomUUID } from 'crypto'
@@ -6,10 +6,12 @@ import { ValidationError } from './exceptions/ValidationError'
 import { errorMiddleware } from '.'
 import * as zod from 'zod'
 import { ErrorMessages } from '../../error/messages'
+import { removeMiddleware } from '../../../utils/http/middleware'
+import { app } from '../../../../core/app'
 
 describe('errorMiddleware', () => {
   it('should throw ValidationError with status 400', async () => {
-    const app = express()
+    removeMiddleware(app, errorMiddleware)
     const errorResponse = { errors: [] }
     const randomPath = `/error-middleware/${randomUUID()}`
 
@@ -30,7 +32,7 @@ describe('errorMiddleware', () => {
   })
 
   it('should throw ZodError with status 400 and formatted response', async () => {
-    const app = express()
+    removeMiddleware(app, errorMiddleware)
     const randomPath = `/error-middleware/${randomUUID()}`
 
     const schema = zod.object({
