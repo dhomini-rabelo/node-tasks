@@ -8,17 +8,19 @@ describe('express app', () => {
   it('should ensure that app accepts json', async () => {
     const data = { name: 'test' }
     const jsonData = JSON.stringify(data)
-    const randomPath = randomUUID()
+    const randomPath = `/${randomUUID()}`
 
-    app.post(`/${randomPath}`, (req: Request, res: Response) => {
+    app.post(randomPath, (req: Request, res: Response) => {
       expect(req.body).toEqual(data)
-      return res.status(200).send(data)
+      return res.status(200).json(data)
     })
 
-    const request = supertest(app)
-      .post(`/${randomPath}`)
+    const response = await supertest(app)
+      .post(randomPath)
       .set('Content-Type', 'application/json')
       .send(jsonData)
-    await request.expect(200)
+      .expect(200)
+
+    expect(response.body).toEqual(data)
   })
 })
