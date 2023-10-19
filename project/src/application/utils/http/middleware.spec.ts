@@ -14,7 +14,7 @@ describe('middleware functions', () => {
     }
     const serverErrorResponse = { status: 500 }
 
-    it('should ensure that middleware is working', async () => {
+    it('should ensure that the middleware is working', async () => {
       const app = express()
       const randomPath = `/removeMiddleware/${randomUUID()}`
 
