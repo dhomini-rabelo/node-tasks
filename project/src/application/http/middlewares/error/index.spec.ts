@@ -11,7 +11,7 @@ import { app } from '../../../../core/app'
 
 describe('errorMiddleware', () => {
   it('should throw ValidationError with status 400', async () => {
-    removeMiddleware(app, errorMiddleware)
+    expect(removeMiddleware(app, errorMiddleware)).toBeTruthy()
     const errorResponse = { errors: [] }
     const randomPath = `/error-middleware/${randomUUID()}`
 
@@ -32,7 +32,7 @@ describe('errorMiddleware', () => {
   })
 
   it('should throw ZodError with status 400 and formatted response', async () => {
-    removeMiddleware(app, errorMiddleware)
+    expect(removeMiddleware(app, errorMiddleware)).toBeTruthy()
     const randomPath = `/error-middleware/${randomUUID()}`
 
     const schema = zod.object({
