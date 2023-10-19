@@ -7,4 +7,8 @@ export class MongooseUserOperations implements IUserOperations {
     const newUser = new UserModel(data)
     return newUser.save()
   }
+
+  async createMany(dataSet: IUserParams[]) {
+    return UserModel.insertMany(dataSet)
+  }
 }
