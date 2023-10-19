@@ -6,3 +6,5 @@ export interface IUser extends IBaseSchema {
 }
 
 export type IUserParams = Omit<IUser, '_id'>
+
+export type IUserCleanParams = Omit<IUserParams, 'password'>
