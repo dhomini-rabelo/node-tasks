@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { HashModule } from '../../../dependencies/modules'
+import { HashModule } from '../../../../core/dependencies/modules'
 
 describe('HashModule', () => {
   const input = 'some-string'

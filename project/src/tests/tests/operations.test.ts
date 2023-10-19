@@ -1,8 +1,8 @@
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { MongoMemoryServer } from 'mongodb-memory-server'
 import mongoose from 'mongoose'
-import { db } from '../core/dependencies/db'
-import { MongooseUserOperations } from '../application/db/repositories/users/cases/mongoose/operations'
+import { db } from '../../core/dependencies/db'
+import { MongooseUserOperations } from '../../application/db/repositories/users/cases/mongoose/operations'
 
 let mongoServer: MongoMemoryServer
 
