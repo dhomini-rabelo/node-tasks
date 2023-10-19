@@ -42,7 +42,7 @@ describe('JWTModule', () => {
     // test
     const userId = randomUUID() + randomUUID()
     const token = JWTModule.generateToken(userId)
-    await sleep(200)
+    await sleep(100)
     const comparison = JWTModule.verifyToken(token)
     expect(comparison).toBeFalsy()
 
