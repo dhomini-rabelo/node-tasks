@@ -5,7 +5,7 @@ describe('HashModule', () => {
   const input = 'some-string'
   const incorrectInput = 'incorrect-input'
 
-  it('should generate an hash', () => {
+  it('should generate a hash', () => {
     const hash = HashModule.generate(input)
     expect(hash !== input).toBeTruthy()
     expect(hash.length > input.length).toBeTruthy()
