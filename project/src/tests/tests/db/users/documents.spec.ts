@@ -1,25 +1,13 @@
-import { afterAll, beforeAll, describe, expect, it } from 'vitest'
-import { MongoMemoryServer } from 'mongodb-memory-server'
-import mongoose from 'mongoose'
+import { beforeAll, describe, expect, it } from 'vitest'
 import { db } from '../../../../core/dependencies/db'
 import { createUser, createUsers } from '../../../factories/users'
 import { some } from '../../dependencies/modules/jwt.spec'
-
-let mongoServer: MongoMemoryServer
+import '../../../setup/mongoose'
 
 const UserModelSchema = {
   username: expect.any(String),
   password: expect.any(String),
 }
-
-beforeAll(async () => {
-  mongoServer = await MongoMemoryServer.create()
-  await mongoose.connect(mongoServer.getUri())
-})
-
-afterAll(async () => {
-  await mongoose.disconnect()
-})
 
 describe('db.User.documents', () => {
   const users = db.User.documents
