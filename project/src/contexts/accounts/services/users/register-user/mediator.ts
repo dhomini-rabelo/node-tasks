@@ -6,7 +6,7 @@ export class CreateUserMediator {
   private validateService = new ValidateUserDataService()
   private createUserService = new CreateUserService()
 
-  async run(data: any | IUserParams): Promise<IUser> {
+  async run(data: IUserParams): Promise<IUser> {
     const validData = await this.validateService.run(data)
     return this.createUserService.run(validData)
   }

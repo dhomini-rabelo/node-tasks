@@ -5,13 +5,13 @@ import { ValidationError } from '../../../../../../application/http/middlewares/
 import { ErrorMessages } from '../../../../../../application/http/error/messages'
 
 export class ValidateUserDataService {
-  async run(inputData: any | IUserParams): Promise<IUserParams> {
+  async run(inputData: IUserParams): Promise<IUserParams> {
     const data = RegisterUserSchema.parse(inputData)
     await this.validateDatabaseRules(data)
     return data
   }
 
-  async validateDatabaseRules(data: IUserParams) {
+  private async validateDatabaseRules(data: IUserParams) {
     const duplicatedUsernameError = !!(await db.User.documents.findOne({
       username: data.username,
     }))
