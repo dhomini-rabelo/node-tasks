@@ -3,11 +3,7 @@ import { db } from '../../../../core/dependencies/db'
 import { createUser, createUsers } from '../../../factories/users'
 import { some } from '../../dependencies/modules/jwt.spec'
 import '../../../setup/mongoose'
-
-const UserModelSchema = {
-  username: expect.any(String),
-  password: expect.any(String),
-}
+import { UserModelSchema } from './_index'
 
 describe('db.User.documents', () => {
   const users = db.User.documents
