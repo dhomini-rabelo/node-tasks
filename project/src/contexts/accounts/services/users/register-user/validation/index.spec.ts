@@ -17,6 +17,17 @@ vi.mock('./schemas', () => {
 describe('ValidateUserDataService', () => {
   const validation = new ValidateUserDataService()
 
+  it('should ensure data validation with schema', async () => {
+    const userData = { username: some.text(), password: some.text(10) }
+    const response = await validation.run({
+      username: userData.username,
+      password: userData.password,
+      confirm_password: userData.password,
+    })
+    expect(response).toEqual(userData)
+    expect(RegisterUserSchema.parse).toHaveBeenCalled()
+  })
+
   it('should throw ValidationError when username already exists', async () => {
     const userData = { username: some.text(), password: some.text(10) }
     await createUser({ username: userData.username })
@@ -27,15 +38,5 @@ describe('ValidateUserDataService', () => {
         confirm_password: userData.password,
       })
     }).rejects.toThrow(ValidationError)
-  })
-
-  it('should ensure data validation with schema', async () => {
-    const userData = { username: some.text(), password: some.text(10) }
-    await validation.run({
-      username: userData.username,
-      password: userData.password,
-      confirm_password: userData.password,
-    })
-    expect(RegisterUserSchema.parse).toHaveBeenCalled()
   })
 })

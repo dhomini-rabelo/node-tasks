@@ -12,7 +12,10 @@ export class ValidateUserDataService {
   async run(inputData: IInputData): Promise<IUserParams> {
     const data = RegisterUserSchema.parse(inputData)
     await this.validateDatabaseRules(data)
-    return data
+    return {
+      username: data.username,
+      password: data.password,
+    }
   }
 
   private async validateDatabaseRules(data: IUserParams) {
