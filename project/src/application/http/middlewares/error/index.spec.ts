@@ -7,7 +7,7 @@ import { errorMiddleware } from '.'
 import * as zod from 'zod'
 import { ErrorMessages } from '../../error/messages'
 import { removeMiddleware } from '../../../utils/http/middleware'
-import { app } from '../../../../core/app'
+import app from '../../../../core/app'
 
 describe('errorMiddleware', () => {
   it('should throw ValidationError with status 400', async () => {
