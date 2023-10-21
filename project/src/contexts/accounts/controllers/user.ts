@@ -14,8 +14,7 @@ export class UserController {
   @publicRouter.post('/users')
   async store(req: Request, res: Response) {
     const service = new CreateUserMediator()
-    return res.status(200).json({
-      data: await service.run(req.body),
-    })
+    await service.run(req.body)
+    return res.status(201).send()
   }
 }
