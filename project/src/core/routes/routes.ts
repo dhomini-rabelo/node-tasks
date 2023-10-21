@@ -1,3 +1,2 @@
-import requireDir from './require-dir'
-
-requireDir('../../contexts/accounts/controllers')
+import '../../contexts/accounts/controllers/auth'
+import '../../contexts/accounts/controllers/user'
