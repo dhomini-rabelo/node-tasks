@@ -4,8 +4,12 @@ import { db } from '../../../../../../core/dependencies/db'
 import { ValidationError } from '../../../../../../application/http/middlewares/error/exceptions/ValidationError'
 import { ErrorMessages } from '../../../../../../application/http/error/messages'
 
+interface IInputData extends IUserParams {
+  confirm_password: string
+}
+
 export class ValidateUserDataService {
-  async run(inputData: IUserParams): Promise<IUserParams> {
+  async run(inputData: IInputData): Promise<IUserParams> {
     const data = RegisterUserSchema.parse(inputData)
     await this.validateDatabaseRules(data)
     return data
