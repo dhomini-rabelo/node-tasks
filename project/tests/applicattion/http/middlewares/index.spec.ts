@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
 import supertest from 'supertest'
-import { describe, expect, it } from 'vitest'
 import { randomUUID } from 'crypto'
 import { ValidationError } from '../../../../src/application/http/middlewares/error/exceptions/ValidationError'
 import { errorMiddleware } from '../../../../src/application/http/middlewares/error'

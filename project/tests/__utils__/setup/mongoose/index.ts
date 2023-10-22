@@ -1,5 +1,4 @@
 import mongoose from 'mongoose'
-import { beforeAll } from 'vitest'
 
 beforeAll(async () => {
   if (mongoose.connections[0].readyState === 0) {

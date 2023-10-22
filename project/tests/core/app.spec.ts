@@ -1,6 +1,5 @@
 import { Request, Response } from 'express'
 import supertest from 'supertest'
-import { describe, expect, it } from 'vitest'
 import app from '../../src/core/app'
 import { randomUUID } from 'crypto'
 

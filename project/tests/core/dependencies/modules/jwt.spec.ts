@@ -1,4 +1,3 @@
-import { describe, expect, it } from 'vitest'
 import { JWTModule } from '../../../../src/core/dependencies/modules'
 import { randomBytes, randomUUID } from 'crypto'
 

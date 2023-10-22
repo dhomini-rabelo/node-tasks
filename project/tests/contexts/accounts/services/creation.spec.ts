@@ -1,4 +1,3 @@
-import { describe, expect, it } from 'vitest'
 import { some } from '../../../__utils__/utils/some'
 import { CreateUserService } from '../../../../src/contexts/accounts/services/users/register-user/creation'
 import '../../../__utils__/setup/mongoose'

@@ -1,6 +1,5 @@
 import express, { NextFunction, Request, Response } from 'express'
 import supertest from 'supertest'
-import { describe, expect, it } from 'vitest'
 import { randomUUID } from 'crypto'
 import { removeMiddleware } from '../../../src/application/utils/http/middleware'
 

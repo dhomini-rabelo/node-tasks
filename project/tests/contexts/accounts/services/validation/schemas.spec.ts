@@ -1,4 +1,3 @@
-import { describe, expect, it } from 'vitest'
 import { RegisterUserSchema } from '../../../../../src/contexts/accounts/services/users/register-user/validation/schemas'
 import {
   DynamicErrors,

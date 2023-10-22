@@ -1,4 +1,3 @@
-import { describe, expect, it } from 'vitest'
 import { HashModule } from '../../../../src/core/dependencies/modules'
 
 describe('HashModule', () => {

@@ -1,4 +1,3 @@
-import { beforeAll, describe, expect, it } from 'vitest'
 import { db } from '../../../../src/core/dependencies/db'
 import { createUser, createUsers } from '../../../__utils__/factories/users'
 import { some } from '../../dependencies/modules/jwt.spec'

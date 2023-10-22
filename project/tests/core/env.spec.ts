@@ -1,4 +1,3 @@
-import { describe, expect, it } from 'vitest'
 import { env } from '../../src/core/dependencies/env'
 
 describe('env', () => {

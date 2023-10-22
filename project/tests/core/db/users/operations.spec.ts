@@ -1,4 +1,3 @@
-import { describe, expect, it } from 'vitest'
 import { db } from '../../../../src/core/dependencies/db'
 import { some } from '../../dependencies/modules/jwt.spec'
 import { UserModelSchema } from './_index'

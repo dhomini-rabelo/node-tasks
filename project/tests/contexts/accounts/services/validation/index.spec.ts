@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest'
+import { vi } from 'vitest'
 import { ValidateUserDataService } from '../../../../../src/contexts/accounts/services/users/register-user/validation'
 import { some } from '../../../../__utils__/utils/some'
 import '../../../../__utils__/setup/mongoose'

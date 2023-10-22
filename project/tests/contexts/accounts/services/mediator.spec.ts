@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto'
-import { Mock, describe, expect, it, vi } from 'vitest'
+import { Mock, vi } from 'vitest'
 import { CreateUserMediator } from '../../../../src/contexts/accounts/services/users/register-user/mediator'
 import { some } from '../../../__utils__/utils/some'
 import '../../../__utils__/setup/mongoose'

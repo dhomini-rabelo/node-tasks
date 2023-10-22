@@ -1,4 +1,3 @@
-import { describe, expect, it } from 'vitest'
 import supertest from 'supertest'
 import app from '../../../../src/core/app'
 import { ErrorMessages } from '../../../../src/application/http/error/messages'
