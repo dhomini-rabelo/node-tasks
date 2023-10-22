@@ -5,6 +5,8 @@ import { CreateUserMediator } from '../services/users/register-user/mediator'
 import { HttpStatusCode } from '../../../application/http/templates/status-code'
 
 export class UserController {
+  static readonly createUserMediator = new CreateUserMediator()
+
   @publicRouter.get('/users')
   async index(req: Request, res: Response) {
     return res.status(HttpStatusCode.OK).json({
@@ -14,8 +16,7 @@ export class UserController {
 
   @publicRouter.post('/users')
   async store(req: Request, res: Response) {
-    const service = new CreateUserMediator()
-    await service.run(req.body)
+    await UserController.createUserMediator.run(req.body)
     return res.status(HttpStatusCode.CREATED).send()
   }
 }
