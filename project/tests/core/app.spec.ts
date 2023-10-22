@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import supertest from 'supertest'
 import app from '../../src/core/app'
 import { randomUUID } from 'crypto'
+import '../__utils__/setup/new-route'
 
 describe('express app', () => {
   it('should ensure that app accepts json', async () => {

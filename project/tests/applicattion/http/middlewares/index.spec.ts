@@ -5,12 +5,11 @@ import { ValidationError } from '../../../../src/application/http/middlewares/er
 import { errorMiddleware } from '../../../../src/application/http/middlewares/error'
 import * as zod from 'zod'
 import { ErrorMessages } from '../../../../src/application/http/error/messages'
-import { removeMiddleware } from '../../../../src/application/utils/http/middleware'
 import app from '../../../../src/core/app'
+import '../../../__utils__/setup/new-route'
 
 describe('errorMiddleware', () => {
   it('should throw ValidationError with status 400', async () => {
-    expect(removeMiddleware(app, errorMiddleware)).toBeTruthy()
     const errorResponse = { errors: [] }
     const randomPath = `/error-middleware/${randomUUID()}`
 
@@ -31,7 +30,6 @@ describe('errorMiddleware', () => {
   })
 
   it('should throw ZodError with status 400 and formatted response', async () => {
-    expect(removeMiddleware(app, errorMiddleware)).toBeTruthy()
     const randomPath = `/error-middleware/${randomUUID()}`
 
     const schema = zod.object({
