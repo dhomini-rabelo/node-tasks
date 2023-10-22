@@ -11,7 +11,7 @@ const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']).default('production'),
   PORT: z.number().default(5001),
   MONGO_URL: z.string(),
-  BASE_PATH: z.string(),
+  SECRET_KEY: z.string(),
 })
 
 const schema = envSchema.safeParse(process.env)
