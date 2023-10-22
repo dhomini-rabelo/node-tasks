@@ -2,12 +2,12 @@ import { NextFunction, Request, Response } from 'express'
 import supertest from 'supertest'
 import { describe, expect, it } from 'vitest'
 import { randomUUID } from 'crypto'
-import { ValidationError } from './exceptions/ValidationError'
-import { errorMiddleware } from '.'
+import { ValidationError } from '../../../../src/application/http/middlewares/error/exceptions/ValidationError'
+import { errorMiddleware } from '../../../../src/application/http/middlewares/error'
 import * as zod from 'zod'
-import { ErrorMessages } from '../../error/messages'
-import { removeMiddleware } from '../../../utils/http/middleware'
-import app from '../../../../core/app'
+import { ErrorMessages } from '../../../../src/application/http/error/messages'
+import { removeMiddleware } from '../../../../src/application/utils/http/middleware'
+import app from '../../../../src/core/app'
 
 describe('errorMiddleware', () => {
   it('should throw ValidationError with status 400', async () => {

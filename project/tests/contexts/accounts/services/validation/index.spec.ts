@@ -1,18 +1,21 @@
 import { describe, expect, it, vi } from 'vitest'
-import { ValidateUserDataService } from '.'
-import { some } from '../../../../../../tests/utils/some'
-import '../../../../../../tests/setup/mongoose'
-import { createUser } from '../../../../../../tests/factories/users'
-import { ValidationError } from '../../../../../../application/http/middlewares/error/exceptions/ValidationError'
-import { RegisterUserSchema } from './schemas'
+import { ValidateUserDataService } from '../../../../../src/contexts/accounts/services/users/register-user/validation'
+import { some } from '../../../../__utils__/utils/some'
+import '../../../../__utils__/setup/mongoose'
+import { createUser } from '../../../../__utils__/factories/users'
+import { ValidationError } from '../../../../../src/application/http/middlewares/error/exceptions/ValidationError'
+import { RegisterUserSchema } from '../../../../../src/contexts/accounts/services/users/register-user/validation/schemas'
 
-vi.mock('./schemas', () => {
-  return {
-    RegisterUserSchema: {
-      parse: vi.fn((data) => data),
-    },
-  }
-})
+vi.mock(
+  '../../../../../src/contexts/accounts/services/users/register-user/validation/schemas',
+  () => {
+    return {
+      RegisterUserSchema: {
+        parse: vi.fn((data) => data),
+      },
+    }
+  },
+)
 
 describe('ValidateUserDataService', () => {
   const validation = new ValidateUserDataService()

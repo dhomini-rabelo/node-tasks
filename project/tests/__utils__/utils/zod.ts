@@ -1,4 +1,4 @@
-import { formatZodError } from '../../application/http/middlewares/error/format'
+import { formatZodError } from '../../../src/application/http/middlewares/error/format'
 import { ZodType } from 'zod'
 
 export function getFormattedZodError<ISchema extends ZodType>(

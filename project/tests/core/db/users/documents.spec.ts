@@ -1,8 +1,8 @@
 import { beforeAll, describe, expect, it } from 'vitest'
-import { db } from '../../../../core/dependencies/db'
-import { createUser, createUsers } from '../../../factories/users'
+import { db } from '../../../../src/core/dependencies/db'
+import { createUser, createUsers } from '../../../__utils__/factories/users'
 import { some } from '../../dependencies/modules/jwt.spec'
-import '../../../setup/mongoose'
+import '../../../__utils__/setup/mongoose'
 import { UserModelSchema } from './_index'
 
 describe('db.User.documents', () => {

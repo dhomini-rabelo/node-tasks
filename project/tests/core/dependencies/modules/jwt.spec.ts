@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { JWTModule } from '../../../../core/dependencies/modules'
+import { JWTModule } from '../../../../src/core/dependencies/modules'
 import { randomBytes, randomUUID } from 'crypto'
 
 export function sleep(ms: number) {

@@ -1,14 +1,14 @@
 import { describe, expect, it } from 'vitest'
-import { RegisterUserSchema } from './schemas'
+import { RegisterUserSchema } from '../../../../../src/contexts/accounts/services/users/register-user/validation/schemas'
 import {
   DynamicErrors,
   ErrorMessages,
-} from '../../../../../../application/http/error/messages'
-import { some } from '../../../../../../tests/utils/some'
+} from '../../../../../src/application/http/error/messages'
+import { some } from '../../../../__utils__/utils/some'
 import {
   getFormattedZodError,
   getZodSuccess,
-} from '../../../../../../tests/utils/zod'
+} from '../../../../__utils__/utils/zod'
 
 describe('RegisterUserSchema', () => {
   it('should verify a valid schema', () => {

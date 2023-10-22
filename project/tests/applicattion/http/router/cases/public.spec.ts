@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express'
 import supertest from 'supertest'
 import { describe, expect, it } from 'vitest'
-import { PublicRouter } from './public'
+import { PublicRouter } from '../../../../../src/application/http/router/cases/public'
 import { randomUUID } from 'crypto'
 
 describe('PublicRouter', () => {

@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest'
-import { some } from '../../../../../tests/utils/some'
-import { CreateUserService } from './creation'
-import '../../../../../tests/setup/mongoose'
-import { db } from '../../../../../core/dependencies/db'
-import { UserModelSchema } from '../../../../../tests/tests/db/users/_index'
+import { some } from '../../../__utils__/utils/some'
+import { CreateUserService } from '../../../../src/contexts/accounts/services/users/register-user/creation'
+import '../../../__utils__/setup/mongoose'
+import { db } from '../../../../src/core/dependencies/db'
+import { UserModelSchema } from '../../../core/db/users/_index'
 
 describe('CreateUserService', () => {
   const service = new CreateUserService()

@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest'
 import supertest from 'supertest'
-import app from '../../../../core/app'
-import { ErrorMessages } from '../../../../application/http/error/messages'
-import '../../../../tests/setup/mongoose'
-import { some } from '../../../../tests/utils/some'
-import { db } from '../../../../core/dependencies/db'
-import { UserModelSchema } from '../../../../tests/tests/db/users/_index'
-import { HttpStatusCode } from '../../../../application/http/templates/status-code'
+import app from '../../../../src/core/app'
+import { ErrorMessages } from '../../../../src/application/http/error/messages'
+import '../../../__utils__/setup/mongoose'
+import { some } from '../../../__utils__/utils/some'
+import { db } from '../../../../src/core/dependencies/db'
+import { UserModelSchema } from '../../../core/db/users/_index'
+import { HttpStatusCode } from '../../../../src/application/http/templates/status-code'
 
 describe('User Controller', () => {
   describe('Create user', () => {

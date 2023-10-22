@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import * as zod from 'zod'
-import { ErrorMessages } from '../../error/messages'
-import { formatZodError } from './format'
+import { ErrorMessages } from '../../../../src/application/http/error/messages'
+import { formatZodError } from '../../../../src/application/http/middlewares/error/format'
 
 const testSchema = zod.object({
   field: zod.string({

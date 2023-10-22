@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
-import { db } from '../../../../core/dependencies/db'
+import { db } from '../../../../src/core/dependencies/db'
 import { some } from '../../dependencies/modules/jwt.spec'
 import { UserModelSchema } from './_index'
-import '../../../setup/mongoose'
+import '../../../__utils__/setup/mongoose'
 
 describe('db.User.operations', () => {
   const operations = db.User.operations

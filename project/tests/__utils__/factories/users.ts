@@ -1,5 +1,5 @@
-import { IUserParams } from '../../application/db/schemas/users'
-import { db } from '../../core/dependencies/db'
+import { IUserParams } from '../../../src/application/db/schemas/users'
+import { db } from '../../../src/core/dependencies/db'
 import { some } from '../utils/some'
 
 export async function createUser({
