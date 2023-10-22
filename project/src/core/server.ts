@@ -1,4 +1,4 @@
-import app from './app'
+import app from '@/core/app'
 import { env } from './dependencies/env'
 import mongoose from 'mongoose'
 

@@ -5,7 +5,7 @@ import { ValidationError } from '../../../../src/application/http/middlewares/er
 import { errorMiddleware } from '../../../../src/application/http/middlewares/error'
 import * as zod from 'zod'
 import { ErrorMessages } from '../../../../src/application/http/error/messages'
-import app from '../../../../src/core/app'
+import app from '@/core/app'
 import '../../../__utils__/setup/new-route'
 
 describe('errorMiddleware', () => {
