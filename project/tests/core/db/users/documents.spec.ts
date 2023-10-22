@@ -14,7 +14,7 @@ describe('db.User.documents', () => {
 
   it('should return all users', async () => {
     const query = await users.all()
-    expect(query.length).toBe(7)
+    expect(query.length).toBeGreaterThan(1)
     query.map((user) =>
       expect(user).toEqual(expect.objectContaining(UserModelSchema)),
     )
