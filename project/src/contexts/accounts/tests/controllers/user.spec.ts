@@ -6,6 +6,7 @@ import '../../../../tests/setup/mongoose'
 import { some } from '../../../../tests/utils/some'
 import { db } from '../../../../core/dependencies/db'
 import { UserModelSchema } from '../../../../tests/tests/db/users/_index'
+import { HttpStatusCode } from '../../../../application/http/templates/status-code'
 
 describe('User Controller', () => {
   describe('Create user', () => {
@@ -17,7 +18,7 @@ describe('User Controller', () => {
           ...userData,
           confirm_password: userData.password,
         })
-        .expect(201)
+        .expect(HttpStatusCode.CREATED)
 
       const createdUser = await db.User.documents.findOne({
         username: userData.username,
@@ -27,7 +28,10 @@ describe('User Controller', () => {
       expect(createdUser?.password).not.toEqual(userData.password)
     })
     it('should return validation errors for invalid body', async () => {
-      const response = await supertest(app).post('/users').send({}).expect(400)
+      const response = await supertest(app)
+        .post('/users')
+        .send({})
+        .expect(HttpStatusCode.BAD_REQUEST)
       expect(response.body).toEqual({
         username: [ErrorMessages.REQUIRED],
         password: [ErrorMessages.REQUIRED],
