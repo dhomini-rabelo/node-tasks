@@ -1,13 +1,14 @@
 import { Request, Response } from 'express'
 import { publicRouter } from '../../../core/routes/routers'
-import { JWTModule } from '../../../core/dependencies/modules'
+import { GetTokenMediator } from '../services/auth/mediator'
 
 export class AuthController {
+  static getToken = new GetTokenMediator()
+
   @publicRouter.post('/get-token')
   async login(req: Request, res: Response) {
-    const token = JWTModule.generateToken(req.body.token)
     return res.status(200).json({
-      token,
+      token: await AuthController.getToken.run(req.body),
     })
   }
 }
