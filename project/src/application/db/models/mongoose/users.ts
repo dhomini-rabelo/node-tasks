@@ -1,7 +1,7 @@
-import mongoose from 'mongoose'
-import { IUser } from '../../schemas/users'
+import mongoose, { Document } from 'mongoose'
+import { IUserParams } from '../../schemas/users'
 
-const UserSchema = new mongoose.Schema<IUser>({
+const UserSchema = new mongoose.Schema<IUserParams>({
   username: {
     type: String,
     required: true,
@@ -12,4 +12,6 @@ const UserSchema = new mongoose.Schema<IUser>({
   password: { type: String, required: true },
 })
 
-export const UserModel = mongoose.model('User', UserSchema)
+export const UserModel = mongoose.model<IUserParams>('User', UserSchema)
+
+export type IUserModel = Document<any, any, IUserParams>

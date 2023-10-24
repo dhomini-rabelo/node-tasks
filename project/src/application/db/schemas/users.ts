@@ -5,6 +5,6 @@ export interface IUser extends IBaseSchema {
   password: string
 }
 
-export type IUserParams = Omit<IUser, '_id'>
+export type IUserParams = Omit<IUser, 'id'>
 
 export type IUserCleanParams = Omit<IUserParams, 'password'>
