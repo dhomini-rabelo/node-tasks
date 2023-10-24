@@ -10,7 +10,7 @@ describe('CreateUserService', () => {
   it('should create a user with encrypted password', async () => {
     const userData = { username: some.text(), password: some.text(10) }
     const response = await service.run(userData)
-    expect(response).toEqual(expect.objectContaining(UserModelSchema))
+    expect(response).toEqual(UserModelSchema)
 
     const createdUser = await db.User.documents.findOne({
       username: userData.username,

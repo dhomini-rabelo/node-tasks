@@ -11,7 +11,7 @@ describe('db.User.operations', () => {
       username: some.text(),
       password: some.text(),
     })
-    expect(user).toEqual(expect.objectContaining(UserModelSchema))
+    expect(user).toEqual(UserModelSchema)
   })
 
   it('should throw an error when required fields were not submitted', async () => {

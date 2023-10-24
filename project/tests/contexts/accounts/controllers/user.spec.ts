@@ -23,7 +23,7 @@ describe('User Controller', () => {
         username: userData.username,
       })
 
-      expect(createdUser).toEqual(expect.objectContaining(UserModelSchema))
+      expect(createdUser).toEqual(UserModelSchema)
       expect(createdUser?.password).not.toEqual(userData.password)
     })
     it('should return validation errors for invalid body', async () => {
