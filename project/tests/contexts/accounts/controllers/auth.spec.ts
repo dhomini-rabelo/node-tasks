@@ -11,7 +11,7 @@ describe('AuthController', () => {
   const createUserService = new CreateUserService()
 
   describe('login', () => {
-    const errorPayload = { message: 'Invalid credentials' }
+    const errorPayload = { message: ErrorMessages.INVALID_CREDENTIALS }
 
     it('should get token for user with encrypted password', async () => {
       const userData = { username: some.text(), password: some.text(10) }
@@ -25,33 +25,33 @@ describe('AuthController', () => {
       })
     })
 
-    it('should return invalid credentials for user without encrypted password', async () => {
+    it('should throw forbidden error for user without encrypted password', async () => {
       const userData = { username: some.text(), password: some.text(10) }
       await createUser(userData)
       const response = await supertest(app)
         .post('/get-token')
         .send(userData)
-        .expect(HttpStatusCode.BAD_REQUEST)
+        .expect(HttpStatusCode.FORBIDDEN)
       expect(response.body).toEqual(errorPayload)
     })
 
-    it('should return invalid credentials for incorrect password', async () => {
+    it('should throw forbidden error for incorrect password', async () => {
       const userData = { username: some.text(), password: some.text(10) }
       const incorrectPassword = some.text(11)
       await createUserService.run(userData)
       const response = await supertest(app)
         .post('/get-token')
         .send({ ...userData, password: incorrectPassword })
-        .expect(HttpStatusCode.BAD_REQUEST)
+        .expect(HttpStatusCode.FORBIDDEN)
       expect(response.body).toEqual(errorPayload)
     })
 
-    it('should return invalid credentials for not found user', async () => {
+    it('should throw forbidden error for not found user', async () => {
       const nonExistentUsername = some.text(11)
       const response = await supertest(app)
         .post('/get-token')
         .send({ username: nonExistentUsername, password: some.text(10) })
-        .expect(HttpStatusCode.BAD_REQUEST)
+        .expect(HttpStatusCode.FORBIDDEN)
       expect(response.body).toEqual(errorPayload)
     })
 
