@@ -1,5 +1,5 @@
 import { IUser } from '@/application/db/schemas/users'
-import { ValidationError } from '@/application/http/middlewares/error/exceptions/ValidationError'
+import { ForbiddenHttpError } from '@/application/http/middlewares/error/exceptions/HttpErrors/Forbidden'
 import { db } from '@/core/dependencies/db'
 import { HashModule } from '@/core/dependencies/modules'
 
@@ -26,8 +26,6 @@ export class VerifyCredentialsService {
   }
 
   private handleInvalidCredencialError(): never {
-    throw new ValidationError({
-      message: 'Invalid credentials',
-    })
+    throw new ForbiddenHttpError('Invalid credentials')
   }
 }
