@@ -3,12 +3,12 @@ import {
   getFormattedZodError,
   getZodSuccess,
 } from '../../../../../__utils__/utils/zod'
-import { some } from '../../../../../__utils__/utils/some'
 import { ErrorMessages } from '@/application/http/error/messages'
+import { createUserData } from '../../../../../__utils__/factories/users'
 
 describe('LoginSchema', () => {
   it('should verify a valid schema', () => {
-    const userData = { username: some.text(), password: some.text(10) }
+    const userData = createUserData()
     const data = getZodSuccess(LoginSchema, {
       username: userData.username,
       password: userData.password,

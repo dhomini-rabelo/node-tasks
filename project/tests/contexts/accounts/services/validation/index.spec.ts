@@ -1,8 +1,10 @@
 import { vi } from 'vitest'
 import { ValidateUserDataService } from '../../../../../src/contexts/accounts/services/users/register-user/validation'
-import { some } from '../../../../__utils__/utils/some'
 import '../../../../__utils__/setup/mongoose'
-import { createUser } from '../../../../__utils__/factories/users'
+import {
+  createUser,
+  createUserData,
+} from '../../../../__utils__/factories/users'
 import { ValidationError } from '../../../../../src/application/http/middlewares/error/exceptions/ValidationError'
 import { RegisterUserSchema } from '../../../../../src/contexts/accounts/services/users/register-user/validation/schemas'
 
@@ -21,7 +23,7 @@ describe('ValidateUserDataService', () => {
   const validation = new ValidateUserDataService()
 
   it('should ensure data validation with schema', async () => {
-    const userData = { username: some.text(), password: some.text(10) }
+    const userData = createUserData()
     const response = await validation.run({
       username: userData.username,
       password: userData.password,
@@ -32,7 +34,7 @@ describe('ValidateUserDataService', () => {
   })
 
   it('should throw ValidationError when username already exists', async () => {
-    const userData = { username: some.text(), password: some.text(10) }
+    const userData = createUserData()
     await createUser({ username: userData.username })
     expect(async () => {
       await validation.run({

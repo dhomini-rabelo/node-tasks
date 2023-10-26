@@ -1,14 +1,14 @@
-import { some } from '../../../__utils__/utils/some'
 import { CreateUserService } from '../../../../src/contexts/accounts/services/users/register-user/creation'
 import '../../../__utils__/setup/mongoose'
 import { db } from '../../../../src/core/dependencies/db'
 import { UserModelSchema } from '../../../core/db/users/_index'
+import { createUserData } from '../../../__utils__/factories/users'
 
 describe('CreateUserService', () => {
   const service = new CreateUserService()
 
   it('should create a user with encrypted password', async () => {
-    const userData = { username: some.text(), password: some.text(10) }
+    const userData = createUserData()
     const response = await service.run(userData)
     expect(response).toEqual(UserModelSchema)
 

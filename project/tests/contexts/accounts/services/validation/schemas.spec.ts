@@ -8,10 +8,11 @@ import {
   getFormattedZodError,
   getZodSuccess,
 } from '../../../../__utils__/utils/zod'
+import { createUserData } from '../../../../__utils__/factories/users'
 
 describe('RegisterUserSchema', () => {
   it('should verify a valid schema', () => {
-    const userData = { username: some.text(), password: some.text(10) }
+    const userData = createUserData()
     const data = getZodSuccess(RegisterUserSchema, {
       username: userData.username,
       password: userData.password,
@@ -71,7 +72,7 @@ describe('RegisterUserSchema', () => {
   })
 
   it('should verify distinct passwords error', () => {
-    const userData = { username: some.text(), password: some.text(10) }
+    const userData = createUserData()
     const errors = getFormattedZodError(RegisterUserSchema, {
       username: userData.username,
       password: userData.password,

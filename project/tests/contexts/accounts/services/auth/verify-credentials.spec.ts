@@ -3,6 +3,7 @@ import { some } from '../../../../__utils__/utils/some'
 import '../../../../__utils__/setup/mongoose'
 import { CreateUserService } from '@/contexts/accounts/services/users/register-user/creation'
 import { ForbiddenHttpError } from '@/application/http/middlewares/error/exceptions/HttpErrors/Forbidden'
+import { createUserData } from '../../../../__utils__/factories/users'
 
 describe('VerifyCredentialsService', () => {
   const sut = new VerifyCredentialsService()
@@ -22,7 +23,7 @@ describe('VerifyCredentialsService', () => {
   })
 
   it('should throw ForbiddenHttpError when password is incorrect', async () => {
-    const userData = { username: some.text(), password: some.text(10) }
+    const userData = createUserData()
     await createUser.run(userData)
     const invalidPassword = some.text(10)
     const credentials = {

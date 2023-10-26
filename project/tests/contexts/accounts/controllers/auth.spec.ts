@@ -4,7 +4,7 @@ import '../../../__utils__/setup/mongoose'
 import { some } from '../../../__utils__/utils/some'
 import { HttpStatusCode } from '../../../../src/application/http/templates/status-code'
 import { CreateUserService } from '@/contexts/accounts/services/users/register-user/creation'
-import { createUser } from '../../../__utils__/factories/users'
+import { createUser, createUserData } from '../../../__utils__/factories/users'
 import { ErrorMessages } from '@/application/http/error/messages'
 
 describe('AuthController', () => {
@@ -14,7 +14,7 @@ describe('AuthController', () => {
     const errorPayload = { message: ErrorMessages.INVALID_CREDENTIALS }
 
     it('should get token for user with encrypted password', async () => {
-      const userData = { username: some.text(), password: some.text(10) }
+      const userData = createUserData()
       await createUserService.run(userData)
       const response = await supertest(app)
         .post('/get-token')
@@ -26,7 +26,7 @@ describe('AuthController', () => {
     })
 
     it('should throw forbidden error for user without encrypted password', async () => {
-      const userData = { username: some.text(), password: some.text(10) }
+      const userData = createUserData()
       await createUser(userData)
       const response = await supertest(app)
         .post('/get-token')
@@ -36,7 +36,7 @@ describe('AuthController', () => {
     })
 
     it('should throw forbidden error for incorrect password', async () => {
-      const userData = { username: some.text(), password: some.text(10) }
+      const userData = createUserData()
       const incorrectPassword = some.text(11)
       await createUserService.run(userData)
       const response = await supertest(app)

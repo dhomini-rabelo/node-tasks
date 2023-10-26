@@ -1,12 +1,12 @@
 import supertest from 'supertest'
 import app from '../../../../src/core/app'
 import '../../../__utils__/setup/mongoose'
-import { some } from '../../../__utils__/utils/some'
 import { HttpStatusCode } from '@/application/http/templates/status-code'
+import { createUserData } from '../../../__utils__/factories/users'
 
 describe('Register and login', () => {
   it('should create an user and get-token', async () => {
-    const userData = { username: some.text(), password: some.text(10) }
+    const userData = createUserData()
 
     await supertest(app)
       .post('/users')

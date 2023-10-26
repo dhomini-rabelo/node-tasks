@@ -2,15 +2,15 @@ import supertest from 'supertest'
 import app from '../../../../src/core/app'
 import { ErrorMessages } from '../../../../src/application/http/error/messages'
 import '../../../__utils__/setup/mongoose'
-import { some } from '../../../__utils__/utils/some'
 import { db } from '../../../../src/core/dependencies/db'
 import { UserModelSchema } from '../../../core/db/users/_index'
 import { HttpStatusCode } from '../../../../src/application/http/templates/status-code'
+import { createUserData } from '../../../__utils__/factories/users'
 
 describe('User Controller', () => {
   describe('Create user', () => {
     it('should create an user', async () => {
-      const userData = { username: some.text(), password: some.text(10) }
+      const userData = createUserData()
       await supertest(app)
         .post('/users')
         .send({
