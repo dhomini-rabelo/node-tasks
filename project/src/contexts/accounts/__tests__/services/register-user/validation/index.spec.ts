@@ -17,11 +17,11 @@ vi.mock('../../../../services/users/register-user/validation/schemas', () => {
 })
 
 describe('ValidateUserDataService', () => {
-  const validation = new ValidateUserDataService()
+  const sut = new ValidateUserDataService()
 
   it('should ensure data validation with schema', async () => {
     const userData = createUserData()
-    const response = await validation.run({
+    const response = await sut.run({
       username: userData.username,
       password: userData.password,
       confirm_password: userData.password,
@@ -34,7 +34,7 @@ describe('ValidateUserDataService', () => {
     const userData = createUserData()
     await createUser({ username: userData.username })
     expect(async () => {
-      await validation.run({
+      await sut.run({
         username: userData.username,
         password: userData.password,
         confirm_password: userData.password,

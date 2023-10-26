@@ -23,10 +23,10 @@ vi.mock('../../../../services/users/register-user/creation', () => {
 })
 
 describe('CreateUserMediator', () => {
-  const mediator = new CreateUserMediator()
+  const sut = new CreateUserMediator()
 
   it('should run ValidateUserDataService and CreateUserService services', async () => {
-    const response = await mediator.run({
+    const response = await sut.run({
       username: some.text(),
       password: some.text(10),
       confirm_password: some.text(10),

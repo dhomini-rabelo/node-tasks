@@ -1,17 +1,6 @@
+import { sleep } from '../../../../../tests/utils'
 import { JWTModule } from '../../../dependencies/modules'
-import { randomBytes, randomUUID } from 'crypto'
-
-export function sleep(ms: number) {
-  /* eslint-disable no-promise-executor-return */
-  return new Promise((resolve) => setTimeout(resolve, ms))
-}
-
-export const some = {
-  text(size = 5): string {
-    const response = randomBytes(Math.ceil(size / 2)).toString('hex')
-    return size % 2 === 0 ? response : response.slice(1)
-  },
-}
+import { randomUUID } from 'crypto'
 
 describe('JWTModule', () => {
   it('should generate a token', () => {

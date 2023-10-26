@@ -5,11 +5,11 @@ import { UserModelSchema } from '../../../../../core/__tests__/db/users/_index'
 import { createUserData } from '../../../../../../tests/factories/users'
 
 describe('CreateUserService', () => {
-  const service = new CreateUserService()
+  const sut = new CreateUserService()
 
   it('should create a user with encrypted password', async () => {
     const userData = createUserData()
-    const response = await service.run(userData)
+    const response = await sut.run(userData)
     expect(response).toEqual(UserModelSchema)
 
     const createdUser = await db.User.documents.findOne({
@@ -22,7 +22,7 @@ describe('CreateUserService', () => {
   it('should throw any database errors', async () => {
     await expect(async () => {
       // @ts-expect-error throw required error
-      await service.run({})
+      await sut.run({})
     }).rejects.toThrow()
   })
 })

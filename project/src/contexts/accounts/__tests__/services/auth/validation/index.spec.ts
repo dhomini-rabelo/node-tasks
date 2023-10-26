@@ -12,11 +12,11 @@ vi.mock('../../../../services/auth/validation/schema', () => {
 })
 
 describe('ValidateUserDataService', () => {
-  const validation = new ValidateUserDataService()
+  const sut = new ValidateUserDataService()
 
   it('should ensure data validation with schema', async () => {
     const userData = createUserData()
-    const response = await validation.run({
+    const response = await sut.run({
       username: userData.username,
       password: userData.password,
     })
