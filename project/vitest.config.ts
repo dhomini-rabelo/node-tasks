@@ -10,7 +10,7 @@ export default defineConfig({
     }),
   ],
   test: {
-    globalSetup: 'tests/__utils__/setup/mongoose/global.ts',
+    globalSetup: 'tests/setup/mongoose/global.ts',
     alias: {
       '@': './src',
     },
