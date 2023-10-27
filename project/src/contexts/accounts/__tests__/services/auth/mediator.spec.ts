@@ -22,7 +22,7 @@ vi.mock('../../../services/auth/verify-credentials', () => {
   }
 })
 
-vi.mock('../../../../../../src/core/dependencies/modules', () => {
+vi.mock('@/core/dependencies/modules', () => {
   return {
     JWTModule: {
       generateToken: vi.fn(() => randomUUID()),
