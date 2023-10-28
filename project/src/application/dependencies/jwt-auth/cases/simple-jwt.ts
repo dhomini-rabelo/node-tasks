@@ -1,10 +1,14 @@
 import { IJWTModule, ISettings } from '../contract'
 import jwt from 'jsonwebtoken'
 
-export class SimpleJWTModule implements IJWTModule {
-  constructor(
-    public readonly settings: ISettings,
-  ) { } // prettier-ignore
+export class SimpleJWTModule extends IJWTModule {
+  prefixIsValid(prefix: string) {
+    return prefix === this.settings.prefix
+  }
+
+  clone(settings: Partial<ISettings>) {
+    return new SimpleJWTModule({ ...this.settings, ...settings })
+  }
 
   generateToken(userId: string) {
     return jwt.sign({ userId }, this.settings.SECRET_KEY, {
