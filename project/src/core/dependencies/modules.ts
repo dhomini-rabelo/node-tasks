@@ -7,5 +7,6 @@ import { env } from './env'
 export const HashModule: IHashModule = new BCryptHashModule()
 export const JWTModule: IJWTModule = new SimpleJWTModule({
   SECRET_KEY: env.SECRET_KEY,
-  expiresIn: 60 * 60 * 2, // 2 hours
+  prefix: 'Bearer',
+  expiresIn: 60 * 60 * 2 * 1000, // 2 hours
 })
