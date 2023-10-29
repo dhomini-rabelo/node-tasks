@@ -7,7 +7,6 @@ export abstract class BaseRouter {
 
   use(...middlewares: RequestHandler[]) {
     this.middlewares.push(...middlewares)
-    console.log(this.middlewares)
   }
 
   wrapper(routeHandler: IRoute) {

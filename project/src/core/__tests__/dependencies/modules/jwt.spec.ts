@@ -24,17 +24,15 @@ describe('JWTModule', () => {
 
   it('should return false when to verify expired token', async () => {
     // setup
-    const initialExpiresIn = JWTModule.settings.expiresIn
-    JWTModule.settings.expiresIn = 50
+    const jwtModule = JWTModule.clone({
+      expiresIn: 50,
+    })
 
     // test
     const userId = randomUUID() + randomUUID()
-    const token = JWTModule.generateToken(userId)
+    const token = jwtModule.generateToken(userId)
     await sleep(100)
-    const comparison = JWTModule.verifyToken(token)
+    const comparison = jwtModule.verifyToken(token)
     expect(comparison).toBeFalsy()
-
-    // tear down
-    JWTModule.settings.expiresIn = initialExpiresIn
   })
 })

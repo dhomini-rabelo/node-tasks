@@ -1,16 +1,12 @@
-export type ISettingsInput = {
+export type ISettings = {
   expiresIn: number
   SECRET_KEY: string
-  prefix?: string
-}
-
-export interface ISettings extends Omit<ISettingsInput, 'prefix'> {
   prefix: string
 }
 
 export abstract class IJWTModule {
   constructor(
-    public readonly settings: ISettings,
+    public readonly settings: Readonly<ISettings>,
   ) { } // prettier-ignore
 
   abstract generateToken(userId: string): string
