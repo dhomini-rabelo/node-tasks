@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express'
 import { JWTModule } from '@/core/dependencies/modules'
-import { UnauthorizedHttpError } from '../error/exceptions/HttpErrors/unauthorized'
+import { UnauthorizedHttpError } from '../error/exceptions/HttpErrors/Unauthorized'
 
 export function authMiddleware(
   req: Request,
@@ -12,6 +12,7 @@ export function authMiddleware(
     if (JWTModule.prefixIsValid(prefix) && JWTModule.verifyToken(token || '')) {
       return next()
     }
+    throw new UnauthorizedHttpError('Invalid credentials')
   }
   throw new UnauthorizedHttpError('Credentials not provided')
 }
