@@ -1,8 +1,8 @@
 import express from 'express'
-import { publicRouter, authRouter } from './routes/routers'
 import { errorMiddleware } from '../application/http/middlewares/error'
-import './routes/routes'
 import { notFoundMiddleware } from '../application/http/middlewares/not-found'
+import { authRouter, publicRouter } from './routes/routers'
+import './routes/routes'
 
 const app = express()
 

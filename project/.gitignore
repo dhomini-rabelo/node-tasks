@@ -1,6 +1,8 @@
+# vscode
+.vscode/
+
 
 # env
-
 .test.env
 
 # study
