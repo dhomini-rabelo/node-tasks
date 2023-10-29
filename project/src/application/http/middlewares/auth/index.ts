@@ -13,5 +13,5 @@ export function authMiddleware(
       return next()
     }
   }
-  throw new UnauthorizedHttpError('Credentials')
+  throw new UnauthorizedHttpError('Credentials not provided')
 }
