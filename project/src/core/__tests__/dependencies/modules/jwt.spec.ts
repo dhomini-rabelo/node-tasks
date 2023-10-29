@@ -22,17 +22,37 @@ describe('JWTModule', () => {
     expect(comparison).toBeFalsy()
   })
 
+  it('should return false when prefix is invalid', () => {
+    const jwtModule = JWTModule.clone({
+      prefix: 'TEST',
+    })
+
+    const comparison = jwtModule.prefixIsValid('incorrect-prefix')
+
+    expect(comparison).toBeFalsy()
+  })
+
+  it('should return true when prefix is valid', () => {
+    const prefix = 'Bearer'
+    const jwtModule = JWTModule.clone({
+      prefix,
+    })
+
+    const comparison = jwtModule.prefixIsValid(prefix)
+
+    expect(comparison).toBeTruthy()
+  })
+
   it('should return false when to verify expired token', async () => {
-    // setup
     const jwtModule = JWTModule.clone({
       expiresIn: 50,
     })
 
-    // test
     const userId = randomUUID() + randomUUID()
     const token = jwtModule.generateToken(userId)
     await sleep(100)
     const comparison = jwtModule.verifyToken(token)
+
     expect(comparison).toBeFalsy()
   })
 })
