@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express'
 import { JWTModule } from '@/core/dependencies/modules'
-import { ForbiddenHttpError } from '../error/exceptions/HttpErrors/Forbidden'
+import { UnauthorizedHttpError } from '../error/exceptions/HttpErrors/unauthorized'
 
 export function authMiddleware(
   req: Request,
@@ -13,5 +13,5 @@ export function authMiddleware(
       return next()
     }
   }
-  throw new ForbiddenHttpError('Forbidden')
+  throw new UnauthorizedHttpError('Credentials')
 }
