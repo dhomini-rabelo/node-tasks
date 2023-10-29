@@ -14,7 +14,7 @@ describe('PublicRouter', () => {
   it('should register a route with GET method', async () => {
     const router = new PublicRouter()
     const app = express()
-    const randomPath = `/removeMiddleware/${randomUUID()}`
+    const randomPath = `/public-router/${randomUUID()}`
 
     class Controller {
       @router.get(randomPath)
@@ -30,10 +30,30 @@ describe('PublicRouter', () => {
     expect(response.status).toBe(200)
   })
 
+  it('should register a route with GET method with middlewares', async () => {
+    const router = new PublicRouter()
+    const app = express()
+    const randomPath = `/public-router/${randomUUID()}`
+    router.use(middleware)
+
+    class Controller {
+      @router.get(randomPath)
+      async route(req: Request, res: Response) {
+        return res.status(200).send()
+      }
+    }
+
+    app.use('/', router.router)
+
+    const response = await supertest(app).get(randomPath).send()
+
+    expect(response.status).toBe(middlewareResponse.status)
+  })
+
   it('should register a route with POST method', async () => {
     const router = new PublicRouter()
     const app = express()
-    const randomPath = `/removeMiddleware/${randomUUID()}`
+    const randomPath = `/public-router/${randomUUID()}`
 
     class Controller {
       @router.post(randomPath)
@@ -49,10 +69,30 @@ describe('PublicRouter', () => {
     expect(response.status).toBe(200)
   })
 
+  it('should register a route with POST method with middlewares', async () => {
+    const router = new PublicRouter()
+    const app = express()
+    const randomPath = `/public-router/${randomUUID()}`
+    router.use(middleware)
+
+    class Controller {
+      @router.post(randomPath)
+      async route(req: Request, res: Response) {
+        return res.status(200).send()
+      }
+    }
+
+    app.use('/', router.router)
+
+    const response = await supertest(app).post(randomPath).send()
+
+    expect(response.status).toBe(middlewareResponse.status)
+  })
+
   it('should send the request to the next middleware when throw error', async () => {
     const router = new PublicRouter()
     const app = express()
-    const randomPath = `/removeMiddleware/${randomUUID()}`
+    const randomPath = `/public-router/${randomUUID()}`
 
     class Controller {
       @router.get(randomPath)
