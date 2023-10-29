@@ -1,6 +1,7 @@
 import { ErrorMessages } from '@/application/http/error/messages'
 import { errorMiddleware } from '@/application/http/middlewares/error'
 import { ForbiddenHttpError } from '@/application/http/middlewares/error/exceptions/HttpErrors/Forbidden'
+import { ValidationError } from '@/application/http/middlewares/error/exceptions/ValidationError'
 import { HttpStatusCode } from '@/application/http/templates/status-code'
 import { randomUUID } from 'crypto'
 import express from 'express'
@@ -37,6 +38,24 @@ describe('errorMiddleware', () => {
 
     expect(response.status).toBe(HttpStatusCode.FORBIDDEN)
     expect(response.body).toEqual({ message: errorMessage })
+  })
+
+  it('should return BadRequest response when any ValidationError is thrown', async () => {
+    const app = express()
+    const randomPath = `/public-router/${randomUUID()}`
+
+    app.post(randomPath, () => {
+      throw new ValidationError({
+        field: [ErrorMessages.REQUIRED],
+      })
+    })
+
+    app.use(errorMiddleware)
+
+    const response = await supertest(app).post(randomPath).send()
+
+    expect(response.status).toBe(HttpStatusCode.BAD_REQUEST)
+    expect(response.body).toEqual({ field: [ErrorMessages.REQUIRED] })
   })
 
   it('should return BadRequest response when any ZodError is thrown', async () => {
