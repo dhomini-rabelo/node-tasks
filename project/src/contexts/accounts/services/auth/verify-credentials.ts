@@ -1,6 +1,6 @@
 import { IUser, IUserParams } from '@/application/db/schemas/users'
 import { ErrorMessages } from '@/application/http/error/messages'
-import { ForbiddenHttpError } from '@/application/http/middlewares/error/exceptions/HttpErrors/Forbidden'
+import { UnauthorizedHttpError } from '@/application/http/middlewares/error/exceptions/HttpErrors/Unauthorized'
 import { db } from '@/core/dependencies/db'
 import { HashModule } from '@/core/dependencies/modules'
 
@@ -27,6 +27,6 @@ export class VerifyCredentialsService {
   }
 
   private handleInvalidCredencialError(): never {
-    throw new ForbiddenHttpError(ErrorMessages.INVALID_CREDENTIALS)
+    throw new UnauthorizedHttpError(ErrorMessages.INVALID_CREDENTIALS)
   }
 }

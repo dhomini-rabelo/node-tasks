@@ -1,9 +1,9 @@
+import { UnauthorizedHttpError } from '@/application/http/middlewares/error/exceptions/HttpErrors/Unauthorized'
 import { VerifyCredentialsService } from '@/contexts/accounts/services/auth/verify-credentials'
-import { some } from '../../../../../../tests/utils/some'
-import '../../../../../../tests/setup/mongoose'
 import { CreateUserService } from '@/contexts/accounts/services/users/register-user/creation'
-import { ForbiddenHttpError } from '@/application/http/middlewares/error/exceptions/HttpErrors/Forbidden'
 import { createUserData } from '../../../../../../tests/factories/users'
+import '../../../../../../tests/setup/mongoose'
+import { some } from '../../../../../../tests/utils/some'
 
 describe('VerifyCredentialsService', () => {
   const sut = new VerifyCredentialsService()
@@ -15,14 +15,14 @@ describe('VerifyCredentialsService', () => {
     await sut.run(credentials)
   })
 
-  it('should throw ForbiddenHttpError when username does not exist', async () => {
+  it('should throw UnauthorizedHttpError when username does not exist', async () => {
     const credentials = { username: some.text(), password: some.text(10) }
     await expect(async () => sut.run(credentials)).rejects.toThrow(
-      ForbiddenHttpError,
+      UnauthorizedHttpError,
     )
   })
 
-  it('should throw ForbiddenHttpError when password is incorrect', async () => {
+  it('should throw UnauthorizedHttpError when password is incorrect', async () => {
     const userData = createUserData()
     await createUser.run(userData)
     const invalidPassword = some.text(10)
@@ -31,7 +31,7 @@ describe('VerifyCredentialsService', () => {
       password: invalidPassword,
     }
     await expect(async () => sut.run(credentials)).rejects.toThrow(
-      ForbiddenHttpError,
+      UnauthorizedHttpError,
     )
   })
 })

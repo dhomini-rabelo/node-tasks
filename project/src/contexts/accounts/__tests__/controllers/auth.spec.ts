@@ -1,14 +1,14 @@
-import supertest from 'supertest'
-import app from '../../../../core/app'
-import '../../../../../tests/setup/mongoose'
-import { some } from '../../../../../tests/utils/some'
-import { HttpStatusCode } from '../../../../application/http/templates/status-code'
+import { ErrorMessages } from '@/application/http/error/messages'
 import { CreateUserService } from '@/contexts/accounts/services/users/register-user/creation'
+import supertest from 'supertest'
 import {
   createUser,
   createUserData,
 } from '../../../../../tests/factories/users'
-import { ErrorMessages } from '@/application/http/error/messages'
+import '../../../../../tests/setup/mongoose'
+import { some } from '../../../../../tests/utils/some'
+import { HttpStatusCode } from '../../../../application/http/templates/status-code'
+import app from '../../../../core/app'
 
 describe('AuthController', () => {
   const createUserService = new CreateUserService()
@@ -28,33 +28,33 @@ describe('AuthController', () => {
       })
     })
 
-    it('should throw forbidden error for user without encrypted password', async () => {
+    it('should throw UNAUTHORIZED response for user without encrypted password', async () => {
       const userData = createUserData()
       await createUser(userData)
       const response = await supertest(app)
         .post('/get-token')
         .send(userData)
-        .expect(HttpStatusCode.FORBIDDEN)
+        .expect(HttpStatusCode.UNAUTHORIZED)
       expect(response.body).toEqual(errorPayload)
     })
 
-    it('should throw forbidden error for incorrect password', async () => {
+    it('should throw UNAUTHORIZED response for incorrect password', async () => {
       const userData = createUserData()
       const incorrectPassword = some.text(11)
       await createUserService.run(userData)
       const response = await supertest(app)
         .post('/get-token')
         .send({ ...userData, password: incorrectPassword })
-        .expect(HttpStatusCode.FORBIDDEN)
+        .expect(HttpStatusCode.UNAUTHORIZED)
       expect(response.body).toEqual(errorPayload)
     })
 
-    it('should throw forbidden error for not found user', async () => {
+    it('should throw UNAUTHORIZED response for not found user', async () => {
       const nonExistentUsername = some.text(11)
       const response = await supertest(app)
         .post('/get-token')
         .send({ username: nonExistentUsername, password: some.text(10) })
-        .expect(HttpStatusCode.FORBIDDEN)
+        .expect(HttpStatusCode.UNAUTHORIZED)
       expect(response.body).toEqual(errorPayload)
     })
 
