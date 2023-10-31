@@ -1,7 +1,11 @@
 import mongoose, { Document } from 'mongoose'
 import { IWorkspaceParams } from '../../schemas/workspace'
 
-const WorkspaceSchema = new mongoose.Schema<IWorkspaceParams>({
+interface IWorkspaceParamsMongoose extends Omit<IWorkspaceParams, 'user_id'> {
+  user_id: mongoose.Schema.Types.ObjectId
+}
+
+const WorkspaceSchema = new mongoose.Schema<IWorkspaceParamsMongoose>({
   title: {
     type: String,
     required: true,
@@ -12,11 +16,16 @@ const WorkspaceSchema = new mongoose.Schema<IWorkspaceParams>({
     type: String,
     required: true,
   },
+  user_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
 })
 
-export const WorkspaceModel = mongoose.model<IWorkspaceParams>(
-  'IWorkspace',
+export const WorkspaceModel = mongoose.model<IWorkspaceParamsMongoose>(
+  'Workspace',
   WorkspaceSchema,
 )
 
-export type IWorkspaceModel = Document<any, any, IWorkspaceParams>
+export type IWorkspaceModel = Document<any, any, IWorkspaceParamsMongoose>
