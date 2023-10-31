@@ -1,11 +1,11 @@
 import { vi } from 'vitest'
-import { ValidateUserDataService } from '../../../../services/users/register-user/validation'
-import '../../../../../../../tests/setup/mongoose'
 import {
   createUser,
   createUserData,
 } from '../../../../../../../tests/factories/users'
+import '../../../../../../../tests/setup/mongoose'
 import { ValidationError } from '../../../../../../application/http/middlewares/error/exceptions/ValidationError'
+import { ValidateUserDataStep } from '../../../../services/users/register-user/validation'
 import { RegisterUserSchema } from '../../../../services/users/register-user/validation/schemas'
 
 vi.mock('../../../../services/users/register-user/validation/schemas', () => {
@@ -16,8 +16,8 @@ vi.mock('../../../../services/users/register-user/validation/schemas', () => {
   }
 })
 
-describe('ValidateUserDataService', () => {
-  const sut = new ValidateUserDataService()
+describe('ValidateUserDataStep', () => {
+  const sut = new ValidateUserDataStep()
 
   it('should ensure data validation with schema', async () => {
     const userData = createUserData()

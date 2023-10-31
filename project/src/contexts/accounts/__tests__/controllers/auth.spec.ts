@@ -1,5 +1,5 @@
 import { ErrorMessages } from '@/application/http/error/messages'
-import { CreateUserService } from '@/contexts/accounts/services/users/register-user/creation'
+import { CreateUserStep } from '@/contexts/accounts/services/users/register-user/creation'
 import supertest from 'supertest'
 import {
   createUser,
@@ -11,14 +11,14 @@ import { HttpStatusCode } from '../../../../application/http/templates/status-co
 import app from '../../../../core/app'
 
 describe('AuthController', () => {
-  const createUserService = new CreateUserService()
+  const createUserStep = new CreateUserStep()
 
   describe('login', () => {
     const errorPayload = { message: ErrorMessages.INVALID_CREDENTIALS }
 
     it('should get token for user with encrypted password', async () => {
       const userData = createUserData()
-      await createUserService.run(userData)
+      await createUserStep.run(userData)
       const response = await supertest(app)
         .post('/get-token')
         .send(userData)
@@ -41,7 +41,7 @@ describe('AuthController', () => {
     it('should throw UNAUTHORIZED response for incorrect password', async () => {
       const userData = createUserData()
       const incorrectPassword = some.text(11)
-      await createUserService.run(userData)
+      await createUserStep.run(userData)
       const response = await supertest(app)
         .post('/get-token')
         .send({ ...userData, password: incorrectPassword })

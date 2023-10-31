@@ -1,13 +1,13 @@
 import { UnauthorizedHttpError } from '@/application/http/middlewares/error/exceptions/HttpErrors/Unauthorized'
 import { VerifyCredentialsStep } from '@/contexts/accounts/services/auth/verify-credentials'
-import { CreateUserService } from '@/contexts/accounts/services/users/register-user/creation'
+import { CreateUserStep } from '@/contexts/accounts/services/users/register-user/creation'
 import { createUserData } from '../../../../../../tests/factories/users'
 import '../../../../../../tests/setup/mongoose'
 import { some } from '../../../../../../tests/utils/some'
 
 describe('VerifyCredentialsStep', () => {
   const sut = new VerifyCredentialsStep()
-  const createUser = new CreateUserService()
+  const createUser = new CreateUserStep()
 
   it('should return user when the credentials is correct', async () => {
     const credentials = { username: some.text(), password: some.text(10) }

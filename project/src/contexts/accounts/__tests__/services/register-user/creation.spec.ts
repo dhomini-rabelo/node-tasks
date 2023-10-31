@@ -1,11 +1,11 @@
-import { CreateUserService } from '../../../services/users/register-user/creation'
-import '../../../../../../tests/setup/mongoose'
-import { db } from '../../../../../core/dependencies/db'
-import { UserModelSchema } from '../../../../../core/__tests__/db/users/_index'
 import { createUserData } from '../../../../../../tests/factories/users'
+import '../../../../../../tests/setup/mongoose'
+import { UserModelSchema } from '../../../../../core/__tests__/db/users/_index'
+import { db } from '../../../../../core/dependencies/db'
+import { CreateUserStep } from '../../../services/users/register-user/creation'
 
-describe('CreateUserService', () => {
-  const sut = new CreateUserService()
+describe('CreateUserStep', () => {
+  const sut = new CreateUserStep()
 
   it('should create a user with encrypted password', async () => {
     const userData = createUserData()
