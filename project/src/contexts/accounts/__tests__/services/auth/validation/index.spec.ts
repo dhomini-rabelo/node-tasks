@@ -1,6 +1,6 @@
-import { vi } from 'vitest'
+import { ValidateUserDataStep } from '@/contexts/accounts/services/auth/validation'
 import { LoginSchema } from '@/contexts/accounts/services/auth/validation/schema'
-import { ValidateUserDataService } from '@/contexts/accounts/services/auth/validation'
+import { vi } from 'vitest'
 import { createUserData } from '../../../../../../../tests/factories/users'
 
 vi.mock('../../../../services/auth/validation/schema', () => {
@@ -11,8 +11,8 @@ vi.mock('../../../../services/auth/validation/schema', () => {
   }
 })
 
-describe('ValidateUserDataService', () => {
-  const sut = new ValidateUserDataService()
+describe('ValidateUserDataStep', () => {
+  const sut = new ValidateUserDataStep()
 
   it('should ensure data validation with schema', async () => {
     const userData = createUserData()

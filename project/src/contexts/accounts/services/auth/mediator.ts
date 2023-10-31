@@ -1,15 +1,15 @@
-import { VerifyCredentialsService } from './verify-credentials'
 import { IUserParams } from '@/application/db/schemas/users'
-import { ValidateUserDataService } from './validation'
 import { JWTModule } from '@/core/dependencies/modules'
+import { ValidateUserDataStep } from './validation'
+import { VerifyCredentialsStep } from './verify-credentials'
 
-export class GetTokenMediator {
-  private validationService = new ValidateUserDataService()
-  private verifyCredentialsService = new VerifyCredentialsService()
+export class GetTokenService {
+  private validationStep = new ValidateUserDataStep()
+  private verifyCredentialsStep = new VerifyCredentialsStep()
 
   async run(inputData: IUserParams): Promise<string> {
-    const data = this.validationService.run(inputData)
-    const user = await this.verifyCredentialsService.run(data)
+    const data = this.validationStep.run(inputData)
+    const user = await this.verifyCredentialsStep.run(data)
     return JWTModule.generateToken(user.id)
   }
 }

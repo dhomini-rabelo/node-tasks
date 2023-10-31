@@ -4,7 +4,7 @@ import { UnauthorizedHttpError } from '@/application/http/middlewares/error/exce
 import { db } from '@/core/dependencies/db'
 import { HashModule } from '@/core/dependencies/modules'
 
-export class VerifyCredentialsService {
+export class VerifyCredentialsStep {
   async run(data: IUserParams): Promise<IUser> {
     const user = await this.verifyUsernameAndGetUser(data.username)
     this.verifyPassword(user, data.password)

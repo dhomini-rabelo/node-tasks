@@ -1,10 +1,10 @@
+import { HttpStatusCode } from '@/application/http/templates/status-code'
 import { Request, Response } from 'express'
 import { publicRouter } from '../../../core/routes/routers'
-import { GetTokenMediator } from '../services/auth/mediator'
-import { HttpStatusCode } from '@/application/http/templates/status-code'
+import { GetTokenService } from '../services/auth/mediator'
 
 export class AuthController {
-  static getToken = new GetTokenMediator()
+  static getToken = new GetTokenService()
 
   @publicRouter.post('/get-token')
   async login(req: Request, res: Response) {
