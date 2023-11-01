@@ -1,7 +1,7 @@
 import { IUserModel } from '@/application/db/models/mongoose/users'
-import { IUser } from '@/application/db/schemas/users'
+import { IUser, IUserSearch } from '@/application/db/schemas/users'
 
-export class UserModelFormatter {
+export class UserDataAdapter {
   format(user: IUserModel): IUser {
     const { _id, ...rest } = user.toJSON({
       versionKey: false,
@@ -19,5 +19,13 @@ export class UserModelFormatter {
 
   formatOrNull(user: IUserModel | null) {
     return user ? this.format(user) : null
+  }
+
+  parse(userSchema: Partial<IUserSearch>) {
+    const { id, ...rest } = userSchema
+    return {
+      _id: String(id),
+      ...rest,
+    }
   }
 }
