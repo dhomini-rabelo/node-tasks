@@ -9,6 +9,7 @@ export interface IUserRepository {
   all: () => Promise<IUser[]>
   find: (params: Partial<IUserSearch>) => Promise<IUser[]>
   findOne: (params: Partial<IUserSearch>) => Promise<IUser | null>
+  get: (params: Partial<IUserSearch>) => Promise<IUser>
 }
 
 export interface IUserModel {

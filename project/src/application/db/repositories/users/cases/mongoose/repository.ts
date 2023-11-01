@@ -17,8 +17,17 @@ export class MongooseUserRepository implements IUserRepository {
   }
 
   async findOne(params: Partial<IUserSearch>) {
-    return this.adapter.formatOrNull(
-      await UserModel.findOne(this.adapter.parse(params)),
-    )
+    const user = await UserModel.findOne(this.adapter.parse(params))
+    return user ? this.adapter.format(user) : null
+  }
+
+  async get(params: Partial<IUserSearch>) {
+    const user = await UserModel.findOne(this.adapter.parse(params))
+
+    if (!user) {
+      throw new Error('test')
+    }
+
+    return this.adapter.format(user)
   }
 }

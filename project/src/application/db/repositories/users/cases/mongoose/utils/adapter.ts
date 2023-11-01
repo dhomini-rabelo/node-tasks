@@ -17,10 +17,6 @@ export class UserDataAdapter {
     return users.map((user) => this.format(user))
   }
 
-  formatOrNull(user: IUserModel | null) {
-    return user ? this.format(user) : null
-  }
-
   parse(userSchema: Partial<IUserSearch>) {
     const { id, ...rest } = userSchema
     return {
