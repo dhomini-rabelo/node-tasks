@@ -10,7 +10,7 @@ export class ValidateWorkspaceDataStep extends IService {
 }
 
 export const WorkspaceSchema = zod.object({
-  username: zod
+  title: zod
     .string({
       required_error: ErrorMessages.REQUIRED,
       invalid_type_error: ErrorMessages.INVALID_VALUE,

@@ -7,5 +7,11 @@ export class CreateWorkspaceService {
   private creationStep = new CreateWorkspaceStep()
   private validationStep = new ValidateWorkspaceDataStep()
 
-  run(data: { payload: Partial<IWorkspaceParams>; user: IUser }) { }
+  run(params: { payload: Partial<IWorkspaceParams>; user: IUser }) {
+    const validPayloadData = this.validationStep.run(params.payload)
+    return this.creationStep.run({
+      ...validPayloadData,
+      user_id: params.user.id,
+    })
+  }
 }
