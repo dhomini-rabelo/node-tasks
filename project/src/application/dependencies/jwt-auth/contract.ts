@@ -11,6 +11,7 @@ export abstract class IJWTModule {
 
   abstract generateToken(userId: string): string
   abstract verifyToken(token: string): boolean
+  abstract getToken(token: string): string
   abstract prefixIsValid(prefix: string): boolean
   abstract clone(userId: Partial<ISettings>): IJWTModule
 }
