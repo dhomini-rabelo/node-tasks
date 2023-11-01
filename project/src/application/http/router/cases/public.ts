@@ -10,7 +10,11 @@ export class PublicRouter extends BaseRouter {
       propertyKey: string,
       descriptor: PropertyDescriptor,
     ) => {
-      this.router.get(path, ...this.middlewares, this.wrapper(descriptor.value))
+      this.router.get(
+        path,
+        ...this.middlewares.map((middleware) => this.wrapper(middleware)),
+        this.wrapper(descriptor.value),
+      )
     }
   }
 
@@ -22,7 +26,7 @@ export class PublicRouter extends BaseRouter {
     ) => {
       this.router.post(
         path,
-        ...this.middlewares,
+        ...this.middlewares.map((middleware) => this.wrapper(middleware)),
         this.wrapper(descriptor.value),
       )
     }
