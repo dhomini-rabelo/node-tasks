@@ -9,7 +9,7 @@ export interface AuthRequestInput extends Request {
 }
 
 export interface AuthRequestOutput extends Request {
-  user?: IUser
+  user: IUser
 }
 
 export async function authMiddleware(
