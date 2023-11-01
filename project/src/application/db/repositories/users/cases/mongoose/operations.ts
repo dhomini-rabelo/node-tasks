@@ -1,17 +1,17 @@
 import { UserModel } from '../../../../models/mongoose/users'
 import { IUserParams } from '../../../../schemas/users'
 import { IUserOperations } from '../../interfaces'
-import { UserModelFormatter } from './utils/formatter'
+import { UserDataAdapter } from './utils/adapter'
 
 export class MongooseUserOperations implements IUserOperations {
-  private formatter = new UserModelFormatter()
+  private adapter = new UserDataAdapter()
 
   async create(data: IUserParams) {
     const newUser = new UserModel(data)
-    return this.formatter.format(await newUser.save())
+    return this.adapter.format(await newUser.save())
   }
 
   async createMany(dataSet: IUserParams[]) {
-    return this.formatter.formatAll(await UserModel.insertMany(dataSet))
+    return this.adapter.formatAll(await UserModel.insertMany(dataSet))
   }
 }

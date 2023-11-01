@@ -1,20 +1,24 @@
 import { UserModel } from '../../../../models/mongoose/users'
-import { IUserCleanParams } from '../../../../schemas/users'
+import { IUserSearch } from '../../../../schemas/users'
 import { IUserRepository } from '../../interfaces'
-import { UserModelFormatter } from './utils/formatter'
+import { UserDataAdapter } from './utils/adapter'
 
 export class MongooseUserRepository implements IUserRepository {
-  private formatter = new UserModelFormatter()
+  private adapter = new UserDataAdapter()
 
   async all() {
-    return this.formatter.formatAll(await UserModel.find())
+    return this.adapter.formatAll(await UserModel.find())
   }
 
-  async find(params: Partial<IUserCleanParams>) {
-    return this.formatter.formatAll(await UserModel.find(params))
+  async find(params: Partial<IUserSearch>) {
+    return this.adapter.formatAll(
+      await UserModel.find(this.adapter.parse(params)),
+    )
   }
 
-  async findOne(params: Partial<IUserCleanParams>) {
-    return this.formatter.formatOrNull(await UserModel.findOne(params))
+  async findOne(params: Partial<IUserSearch>) {
+    return this.adapter.formatOrNull(
+      await UserModel.findOne(this.adapter.parse(params)),
+    )
   }
 }
