@@ -7,3 +7,5 @@ export interface IWorkspace extends IBaseSchema {
 }
 
 export type IWorkspaceParams = Omit<IWorkspace, 'id'>
+
+export type IWorkspaceSimpleData = Omit<IWorkspace, 'id' | 'user_id'>
