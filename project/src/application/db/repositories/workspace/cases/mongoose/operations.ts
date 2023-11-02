@@ -1,17 +1,17 @@
 import { WorkspaceModel } from '@/application/db/models/mongoose/workspace'
 import { IWorkspaceParams } from '@/application/db/schemas/workspace'
 import { IWorkspaceOperations } from '../../interfaces'
-import { WorkspaceFormatter } from './utils/formatter'
+import { WorkspaceDataAdapter } from './utils/adapter'
 
 export class MongooseWorkspaceOperations implements IWorkspaceOperations {
-  private formatter = new WorkspaceFormatter()
+  private adapter = new WorkspaceDataAdapter()
 
   async create(data: IWorkspaceParams) {
     const newWorkspace = new WorkspaceModel(data)
-    return this.formatter.format(await newWorkspace.save())
+    return this.adapter.format(await newWorkspace.save())
   }
 
   async createMany(dataSet: IWorkspaceParams[]) {
-    return this.formatter.formatAll(await WorkspaceModel.insertMany(dataSet))
+    return this.adapter.formatAll(await WorkspaceModel.insertMany(dataSet))
   }
 }

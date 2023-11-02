@@ -1,20 +1,20 @@
 import { WorkspaceModel } from '@/application/db/models/mongoose/workspace'
 import { IWorkspaceParams } from '@/application/db/schemas/workspace'
 import { IWorkspaceRepository } from '../../interfaces'
-import { WorkspaceFormatter } from './utils/formatter'
+import { WorkspaceDataAdapter } from './utils/adapter'
 
 export class MongooseWorkspaceRepository implements IWorkspaceRepository {
-  private formatter = new WorkspaceFormatter()
+  private adapter = new WorkspaceDataAdapter()
 
   async all() {
-    return this.formatter.formatAll(await WorkspaceModel.find())
+    return this.adapter.formatAll(await WorkspaceModel.find())
   }
 
   async find(params: Partial<IWorkspaceParams>) {
-    return this.formatter.formatAll(await WorkspaceModel.find(params))
+    return this.adapter.formatAll(await WorkspaceModel.find(params))
   }
 
   async findOne(params: Partial<IWorkspaceParams>) {
-    return this.formatter.formatOrNull(await WorkspaceModel.findOne(params))
+    return this.adapter.formatOrNull(await WorkspaceModel.findOne(params))
   }
 }
