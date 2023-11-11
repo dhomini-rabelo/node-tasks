@@ -4,12 +4,11 @@ import { publicRouter } from '../../../core/routes/routers'
 import { GetTokenService } from '../services/auth/mediator'
 
 export class AuthController {
-  static getToken = new GetTokenService()
-
   @publicRouter.post('/get-token')
   async login(req: Request, res: Response) {
+    const getTokenService = new GetTokenService()
     return res.status(HttpStatusCode.OK).json({
-      token: await AuthController.getToken.run(req.body),
+      token: await getTokenService.run(req.body),
     })
   }
 }

@@ -4,11 +4,10 @@ import { publicRouter } from '../../../core/routes/routers'
 import { CreateUserService } from '../services/users/register-user/mediator'
 
 export class UserController {
-  static createUserSCreateUserService = new CreateUserService()
-
   @publicRouter.post('/users')
   async store(req: Request, res: Response) {
-    await UserController.createUserSCreateUserService.run(req.body)
+    const createUserService = new CreateUserService()
+    await createUserService.run(req.body)
     return res.status(HttpStatusCode.CREATED).send()
   }
 }
