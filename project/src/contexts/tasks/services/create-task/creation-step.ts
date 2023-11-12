@@ -8,12 +8,14 @@ interface IRequest extends Omit<ICreateTaskServiceRequest, 'data'> {
 }
 
 export class CreationStep {
+  private readonly IS_DONE_DEFAULT_VALUE = false
+
   async run(request: IRequest): Promise<ITask> {
     return db.Task.operations.create({
       title: request.data.title,
       description: request.data.description,
       user_id: request.user.id,
-      isDone: false,
+      isDone: this.IS_DONE_DEFAULT_VALUE,
     })
   }
 }
