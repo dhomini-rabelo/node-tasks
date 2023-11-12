@@ -11,6 +11,7 @@ export default defineConfig({
   ],
   test: {
     globalSetup: 'tests/setup/mongoose/global.ts',
+    setupFiles: ['tests/setup/extend.ts'],
     alias: {
       '@': '/src',
     },
