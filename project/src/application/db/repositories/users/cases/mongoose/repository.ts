@@ -1,7 +1,9 @@
+import { ResourceNotFound } from '@/application/db/errors/ResourceNotFound'
 import { UserModel } from '../../../../models/mongoose/users'
 import { IUserSearch } from '../../../../schemas/users'
 import { IUserRepository } from '../../interfaces'
 import { UserDataAdapter } from './utils/adapter'
+import { ManyResourcesFound } from '@/application/db/errors/ManyResourcesFound'
 
 export class MongooseUserRepository implements IUserRepository {
   private adapter = new UserDataAdapter()
@@ -22,12 +24,14 @@ export class MongooseUserRepository implements IUserRepository {
   }
 
   async get(params: Partial<IUserSearch>) {
-    const user = await UserModel.findOne(this.adapter.query(params))
+    const users = await UserModel.find(this.adapter.query(params))
 
-    if (!user) {
-      throw new Error('test')
+    if (users.length === 0) {
+      throw new ResourceNotFound()
+    } else if (users.length > 1) {
+      throw new ManyResourcesFound()
     }
 
-    return this.adapter.format(user)
+    return this.adapter.format(users[0])
   }
 }
