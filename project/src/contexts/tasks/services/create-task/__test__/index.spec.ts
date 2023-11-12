@@ -3,7 +3,6 @@ import { CreateTaskService } from '..'
 import { createTaskData } from '../../../../../../tests/factories/tasks'
 import { createUser } from '../../../../../../tests/factories/users'
 import '@tests/setup/mongoose'
-import { TaskModelSchema } from '@/core/__tests__/db/tasks/_index'
 import { ValidationStep } from '../validation-step'
 import { randomUUID } from 'crypto'
 import { CreationStep } from '../creation-step'
@@ -36,16 +35,6 @@ describe('CreateTaskService', () => {
     user = await createUser()
   })
 
-  it('should create a task', async () => {
-    const task = await sut.run({
-      user,
-      data: {
-        ...createTaskData({ user_id: user.id }),
-      },
-    })
-    expect(task).toEqual(TaskModelSchema)
-  })
-
   it('should call ValidationStep', async () => {
     await sut.run({
       user,
@@ -58,8 +47,8 @@ describe('CreateTaskService', () => {
     expect(validationStep.mock.results[0].value.run).toHaveBeenCalled()
   })
 
-  it('should call CreationStep', async () => {
-    await sut.run({
+  it('should call CreationStep and returns CreationStep response', async () => {
+    const response = await sut.run({
       user,
       data: {
         ...createTaskData({ user_id: user.id }),
@@ -68,5 +57,8 @@ describe('CreateTaskService', () => {
     const creationStep = CreationStep as Mock
     expect(creationStep.mock).not.toBeUndefined()
     expect(creationStep.mock.results[0].value.run).toHaveBeenCalled()
+    expect(response).toEqual(
+      creationStep.mock.results[0].value.run.mock.results[1].value,
+    )
   })
 })

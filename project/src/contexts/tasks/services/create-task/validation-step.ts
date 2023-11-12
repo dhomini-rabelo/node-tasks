@@ -35,10 +35,7 @@ export class ValidationStep {
     return validData
   }
 
-  private async validateDatabaseRules(data: {
-    title: string
-    description: string | null
-  }) {
+  private async validateDatabaseRules(data: IValidationStepResponse) {
     const duplicatedTitleError = !!(await db.Task.documents.findOne({
       title: data.title,
     }))
