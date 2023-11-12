@@ -18,16 +18,18 @@ describe('ValidationStep for CreateTaskService', () => {
     user = await createUser()
   })
 
-  it('should return a valid task data with "isDone" equal to false', async () => {
+  it('should return a valid task data', async () => {
     const response = await sut.run({
-      title: some.text(),
-      description: some.text(),
-      user_id: user.id,
+      user,
+      data: {
+        title: some.text(),
+        description: some.text(),
+      },
     })
 
     expect(response).toEqual({
-      ...TaskParamsModelSchema,
-      isDone: false,
+      title: TaskParamsModelSchema.title,
+      description: TaskParamsModelSchema.description,
     })
   })
 
@@ -36,9 +38,11 @@ describe('ValidationStep for CreateTaskService', () => {
 
     await expect(async () => {
       await sut.run({
-        title: createdTaskInTheDatabase.title,
-        description: some.text(),
-        user_id: some.text(24),
+        user,
+        data: {
+          title: createdTaskInTheDatabase.title,
+          description: some.text(),
+        },
       })
     }).rejects.toThrow(ValidationError)
   })
@@ -46,6 +50,8 @@ describe('ValidationStep for CreateTaskService', () => {
   it('should throw ZodError when data are invalid', async () => {
     await expect(async () => {
       await sut.run({
+        user,
+        data: {},
         // required fields not sent
       })
     }).rejects.toThrow(ZodError)

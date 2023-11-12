@@ -9,6 +9,4 @@ export interface ITask extends IBaseSchema {
 
 export type ITaskParams = Omit<ITask, 'id'>
 
-export type ITaskConcreteParams = Omit<ITask, 'id' | 'isDone'>
-
 export type ITaskNonRelationalData = Omit<ITask, 'id' | 'user_id'>

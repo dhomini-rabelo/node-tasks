@@ -38,14 +38,20 @@ describe('CreateTaskService', () => {
 
   it('should create a task', async () => {
     const task = await sut.run({
-      ...createTaskData({ user_id: user.id }),
+      user,
+      data: {
+        ...createTaskData({ user_id: user.id }),
+      },
     })
     expect(task).toEqual(TaskModelSchema)
   })
 
   it('should call ValidationStep', async () => {
     await sut.run({
-      ...createTaskData({ user_id: user.id }),
+      user,
+      data: {
+        ...createTaskData({ user_id: user.id }),
+      },
     })
     const validationStep = ValidationStep as Mock
     expect(validationStep.mock).not.toBeUndefined()
@@ -54,7 +60,10 @@ describe('CreateTaskService', () => {
 
   it('should call CreationStep', async () => {
     await sut.run({
-      ...createTaskData({ user_id: user.id }),
+      user,
+      data: {
+        ...createTaskData({ user_id: user.id }),
+      },
     })
     const creationStep = CreationStep as Mock
     expect(creationStep.mock).not.toBeUndefined()

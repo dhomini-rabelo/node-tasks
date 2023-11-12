@@ -1,14 +1,15 @@
-import {
-  ITaskConcreteParams,
-  ITaskParams,
-} from '@/application/db/schemas/tasks'
 import { DynamicErrors, ErrorMessages } from '@/application/http/error/messages'
 import { ValidationError } from '@/application/http/middlewares/error/exceptions/ValidationError'
 import { db } from '@/core/dependencies/db'
 import * as zod from 'zod'
+import { ICreateTaskServiceRequest } from '.'
+
+export interface IValidationStepResponse {
+  title: string
+  description: string | null
+}
 
 export class ValidationStep {
-  private IS_DONE_DEFAULT_VALUE = false
   static schema = zod.object({
     title: zod
       .string({
@@ -26,14 +27,12 @@ export class ValidationStep {
       .default(null),
   })
 
-  async run(inputData: Partial<ITaskConcreteParams>): Promise<ITaskParams> {
-    const validData = ValidationStep.schema.parse(inputData)
+  async run(
+    request: ICreateTaskServiceRequest,
+  ): Promise<IValidationStepResponse> {
+    const validData = ValidationStep.schema.parse(request.data)
     await this.validateDatabaseRules(validData)
-    return {
-      ...validData,
-      isDone: this.IS_DONE_DEFAULT_VALUE,
-      user_id: '',
-    }
+    return validData
   }
 
   private async validateDatabaseRules(data: {
