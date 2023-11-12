@@ -14,6 +14,7 @@ export default defineConfig({
     setupFiles: ['tests/setup/extend.ts'],
     alias: {
       '@': '/src',
+      '@tests': '/tests',
     },
   },
 })
