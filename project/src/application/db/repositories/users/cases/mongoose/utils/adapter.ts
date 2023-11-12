@@ -1,5 +1,6 @@
 import { IUserModel } from '@/application/db/models/mongoose/users'
 import { IUser, IUserSearch } from '@/application/db/schemas/users'
+import { removeUndefinedKeys } from '@/application/utils/generic'
 
 export class UserDataAdapter {
   format(user: IUserModel): IUser {
@@ -17,11 +18,19 @@ export class UserDataAdapter {
     return users.map((user) => this.format(user))
   }
 
-  parse(userSchema: Partial<IUserSearch>) {
-    const { id, ...rest } = userSchema
+  parse(user: IUser) {
+    const { id, ...rest } = user
     return {
-      _id: String(id),
+      _id: id,
       ...rest,
     }
+  }
+
+  query(user: Partial<IUserSearch>) {
+    const { id, ...rest } = user
+    return removeUndefinedKeys({
+      _id: id,
+      ...rest,
+    })
   }
 }
