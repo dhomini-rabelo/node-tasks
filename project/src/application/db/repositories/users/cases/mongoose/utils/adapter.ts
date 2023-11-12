@@ -18,14 +18,6 @@ export class UserDataAdapter {
     return users.map((user) => this.format(user))
   }
 
-  parse(user: IUser) {
-    const { id, ...rest } = user
-    return {
-      _id: id,
-      ...rest,
-    }
-  }
-
   query(user: Partial<IUserSearch>) {
     const { id, ...rest } = user
     return removeUndefinedKeys({
