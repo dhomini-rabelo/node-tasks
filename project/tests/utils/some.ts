@@ -14,4 +14,8 @@ export const some = {
     const randomBinaryNumber = generateRandomIntegerNumberBetween(0, 1)
     return randomBinaryNumber === 1
   },
+  value: <T>(...values: T[]): T => {
+    const randomIndex = generateRandomIntegerNumberBetween(0, values.length - 1)
+    return values[randomIndex]
+  },
 }
