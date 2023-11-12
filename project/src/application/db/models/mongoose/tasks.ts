@@ -30,4 +30,5 @@ const TaskSchema = new mongoose.Schema<ITaskParamsMongoose>({
 
 export const TaskModel = mongoose.model<ITaskParamsMongoose>('task', TaskSchema)
 
+// eslint-disable-next-line
 export type ITaskModel = Document<any, any, ITaskParamsMongoose>

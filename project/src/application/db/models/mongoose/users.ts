@@ -14,4 +14,5 @@ const UserSchema = new mongoose.Schema<IUserParams>({
 
 export const UserModel = mongoose.model<IUserParams>('User', UserSchema)
 
+// eslint-disable-next-line
 export type IUserModel = Document<any, any, IUserParams>

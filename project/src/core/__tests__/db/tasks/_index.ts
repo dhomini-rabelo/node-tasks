@@ -6,6 +6,7 @@ export const TaskModelSchema = {
   user_id: expect.any(String),
 }
 
+// eslint-disable-next-line
 const { id, ...params } = TaskModelSchema
 
 export const TaskParamsModelSchema = {
