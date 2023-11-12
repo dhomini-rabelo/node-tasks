@@ -3,6 +3,7 @@ import { createUser, createUsers } from '../../../../../tests/factories/users'
 import '../../../../../tests/setup/mongoose'
 import { UserModelSchema } from './_index'
 import { some } from '../../../../../tests/utils/some'
+import { ResourceNotFound } from '@/application/db/errors/ResourceNotFound'
 
 describe('db.User.documents', () => {
   const sut = db.User.documents
@@ -35,10 +36,10 @@ describe('db.User.documents', () => {
     expect(query).toStrictEqual([])
   })
 
-  it('should find specific user', async () => {
+  it('should find one user from username', async () => {
     const username = some.text()
     await createUser({ username })
-    const user = await sut.findOne({
+    const user = await sut.get({
       username,
     })
     expect(user).toEqual(UserModelSchema)
@@ -46,8 +47,24 @@ describe('db.User.documents', () => {
 
   it('should return null when not found nothing', async () => {
     const user = await sut.findOne({
-      username: 'inexistent-username',
+      username: 'non-existent-username',
     })
     expect(user).toBeNull()
+  })
+
+  it('should find only one user', async () => {
+    const createdUserInTheDatabase = await createUser()
+    const user = await sut.get({
+      id: createdUserInTheDatabase.id,
+    })
+    expect(user).toEqual(UserModelSchema)
+  })
+
+  it('should throw ResourceNotFound when not found nothing', async () => {
+    await expect(async () => {
+      await sut.get({
+        username: 'non-existent-username',
+      })
+    }).rejects.toThrow(ResourceNotFound)
   })
 })
