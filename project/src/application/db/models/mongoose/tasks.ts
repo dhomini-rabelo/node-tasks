@@ -9,11 +9,13 @@ const TaskSchema = new mongoose.Schema<ITaskParamsMongoose>({
   title: {
     type: String,
     required: true,
+    unique: true,
     minlength: 3,
     maxLength: 64,
   },
   description: {
     type: String,
+    default: null,
   },
   isDone: {
     type: Boolean,
