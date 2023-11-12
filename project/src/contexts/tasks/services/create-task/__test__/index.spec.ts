@@ -11,7 +11,10 @@ import { Mock } from 'vitest'
 vi.mock('@/contexts/tasks/services/create-task/validation-step', () => {
   return {
     ValidationStep: vi.fn(() => ({
-      run: vi.fn((data) => data),
+      run: vi.fn((data) => ({
+        ...data,
+        title: randomUUID(),
+      })),
     })),
   }
 })
@@ -26,6 +29,11 @@ vi.mock('@/contexts/tasks/services/create-task/creation-step', () => {
     })),
   }
 })
+
+// eslint-disable-next-line
+// @ts-expect-error
+const validationStep = ValidationStep as Mock
+const creationStep = CreationStep as Mock
 
 describe('CreateTaskService', () => {
   const sut = new CreateTaskService()
@@ -42,7 +50,7 @@ describe('CreateTaskService', () => {
         ...createTaskData({ user_id: user.id }),
       },
     })
-    const validationStep = ValidationStep as Mock
+
     expect(validationStep.mock).not.toBeUndefined()
     expect(validationStep.mock.results[0].value.run).toHaveBeenCalled()
   })
@@ -54,11 +62,23 @@ describe('CreateTaskService', () => {
         ...createTaskData({ user_id: user.id }),
       },
     })
-    const creationStep = CreationStep as Mock
+
     expect(creationStep.mock).not.toBeUndefined()
     expect(creationStep.mock.results[0].value.run).toHaveBeenCalled()
     expect(response).toEqual(
       creationStep.mock.results[0].value.run.mock.results[1].value,
     )
+  })
+
+  it('should call CreationStep sending validationStep data', async () => {
+    await sut.run({
+      user,
+      data: {
+        ...createTaskData({ user_id: user.id }),
+      },
+    })
+    expect(
+      validationStep.mock.results[0].value.run.mock.results[2].value,
+    ).toEqual(creationStep.mock.results[0].value.run.mock.lastCall[0].data)
   })
 })
