@@ -12,7 +12,7 @@ declare global {
   const beforeEach: typeof import('vitest')['beforeEach']
   const chai: typeof import('vitest')['chai']
   const describe: typeof import('vitest')['describe']
-  const expect: typeof import('vitest')['expect'] & { anyStringOrNull: () => void }
+  const expect: typeof import('vitest')['expect'] & { nullOrAnyString: () => void }
   const it: typeof import('vitest')['it']
   const suite: typeof import('vitest')['suite']
   const test: typeof import('vitest')['test']
