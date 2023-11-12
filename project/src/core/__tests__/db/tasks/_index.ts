@@ -5,3 +5,9 @@ export const TaskModelSchema = {
   isDone: expect.any(Boolean),
   user_id: expect.any(String),
 }
+
+const { id, ...params } = TaskModelSchema
+
+export const TaskParamsModelSchema = {
+  ...params,
+}
