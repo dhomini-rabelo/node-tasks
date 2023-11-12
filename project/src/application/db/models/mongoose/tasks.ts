@@ -5,7 +5,7 @@ interface ITaskParamsMongoose extends Omit<ITaskParams, 'user_id'> {
   user_id: mongoose.Schema.Types.ObjectId
 }
 
-const taskSchema = new mongoose.Schema<ITaskParamsMongoose>({
+const TaskSchema = new mongoose.Schema<ITaskParamsMongoose>({
   title: {
     type: String,
     required: true,
@@ -26,6 +26,6 @@ const taskSchema = new mongoose.Schema<ITaskParamsMongoose>({
   },
 })
 
-export const taskModel = mongoose.model<ITaskParamsMongoose>('task', taskSchema)
+export const TaskModel = mongoose.model<ITaskParamsMongoose>('task', TaskSchema)
 
 export type ITaskModel = Document<any, any, ITaskParamsMongoose>
