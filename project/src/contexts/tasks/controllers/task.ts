@@ -34,6 +34,7 @@ export class TaskController {
     return res.status(HttpStatusCode.OK).json(
       await service.run({
         id: req.params.id,
+        user: req.user,
       }),
     )
   }

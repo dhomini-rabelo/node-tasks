@@ -16,6 +16,6 @@ export class MongooseTaskOperations implements ITaskOperations {
   }
 
   async save(data: ITask) {
-    await TaskModel.updateOne({ id: data.id }, data)
+    await TaskModel.updateOne({ _id: data.id }, data)
   }
 }

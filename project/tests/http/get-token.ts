@@ -1,3 +1,4 @@
+import { IUserParams } from '@/application/db/schemas/users'
 import { HttpStatusCode } from '@/application/http/templates/status-code'
 import app from '@/core/app'
 import { JWTModule } from '@/core/dependencies/modules'
@@ -15,6 +16,15 @@ export async function getAuthorizationHeader() {
     })
     .expect(HttpStatusCode.CREATED)
 
+  const loginResponse = await supertest(app)
+    .post('/get-token')
+    .send(userData)
+    .expect(HttpStatusCode.OK)
+
+  return `${JWTModule.settings.prefix} ${loginResponse.body.token}`
+}
+
+export async function getAuthorizationHeaderFromUser(userData: IUserParams) {
   const loginResponse = await supertest(app)
     .post('/get-token')
     .send(userData)
