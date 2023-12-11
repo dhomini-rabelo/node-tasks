@@ -4,6 +4,7 @@ import { IUser } from '@/application/db/schemas/users'
 import { createUser } from '@tests/factories/users'
 import '@tests/setup/mongoose'
 import { CreationStep } from '../creation-step'
+import { db } from '@/core/dependencies/db'
 
 describe('CreationStep for CreateTaskService', () => {
   const sut = new CreationStep()
@@ -13,7 +14,7 @@ describe('CreationStep for CreateTaskService', () => {
     user = await createUser()
   })
 
-  it('should return a valid task data with isDone equal to false', async () => {
+  it('should return a valid task data', async () => {
     const response = await sut.run({
       user,
       data: {
@@ -22,6 +23,26 @@ describe('CreationStep for CreateTaskService', () => {
       },
     })
 
-    expect(response).toEqual(TaskModelSchema)
+    expect(response).toEqual({
+      ...TaskModelSchema,
+      isDone: false,
+    })
+  })
+
+  it('should save a task in the database with isDone equal to false', async () => {
+    const response = await sut.run({
+      user,
+      data: {
+        title: some.text(),
+        description: some.text(),
+      },
+    })
+
+    const savedTask = await db.Task.documents.findOne({ id: response.id })
+
+    expect(savedTask).toEqual({
+      ...TaskModelSchema,
+      isDone: false,
+    })
   })
 })
