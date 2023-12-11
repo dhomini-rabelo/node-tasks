@@ -3,6 +3,7 @@ import { ITask, ITaskParams } from '../../../schemas/tasks'
 export interface ITaskOperations {
   create: (data: ITaskParams) => Promise<ITask>
   createMany: (dataSet: ITaskParams[]) => Promise<ITask[]>
+  save: (data: ITask) => Promise<void>
 }
 
 export interface ITaskRepository {

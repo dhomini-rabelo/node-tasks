@@ -1,5 +1,5 @@
 import { TaskModel } from '../../../../models/mongoose/tasks'
-import { ITaskParams } from '../../../../schemas/tasks'
+import { ITask, ITaskParams } from '../../../../schemas/tasks'
 import { ITaskOperations } from '../../interfaces'
 import { TaskDataAdapter } from './utils/adapter'
 
@@ -13,5 +13,9 @@ export class MongooseTaskOperations implements ITaskOperations {
 
   async createMany(dataSet: ITaskParams[]) {
     return this.adapter.formatAll(await TaskModel.insertMany(dataSet))
+  }
+
+  async save(data: ITask) {
+    await TaskModel.updateOne({ id: data.id }, data)
   }
 }
