@@ -10,7 +10,11 @@ export class TaskController {
   @authRouter.get('/tasks')
   async index(req: AuthRequestOutput, res: Response) {
     const service = new ListTaskService()
-    return res.status(HttpStatusCode.OK).json(await service.run())
+    return res.status(HttpStatusCode.OK).json(
+      await service.run({
+        user: req.user,
+      }),
+    )
   }
 
   @authRouter.post('/tasks')
