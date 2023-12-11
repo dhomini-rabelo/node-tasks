@@ -10,7 +10,7 @@ describe('ListTaskService', () => {
     const user = await createUser()
     const tasks = await createTasks(2, { user_id: user.id })
 
-    const response = await sut.execute()
+    const response = await sut.run()
 
     expect(response).toEqual(expect.arrayContaining(tasks))
   })
