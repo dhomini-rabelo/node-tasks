@@ -5,7 +5,7 @@ interface IRequest {
 }
 
 export class MarkTaskService {
-  async execute(request: IRequest): Promise<void> {
+  async run(request: IRequest): Promise<void> {
     const task = await db.Task.documents.get({ id: request.id })
     await db.Task.operations.save({ ...task, isDone: true })
   }

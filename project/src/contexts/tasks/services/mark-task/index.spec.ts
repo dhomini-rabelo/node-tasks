@@ -11,7 +11,7 @@ describe('MarkTaskService', () => {
     const user = await createUser()
     const task = await createTasks(1, { user_id: user.id })
 
-    await sut.execute({ id: task[0].id })
+    await sut.run({ id: task[0].id })
 
     const updatedTask = await db.Task.documents.get({ id: task[0].id })
     expect(updatedTask.isDone).toBe(true)

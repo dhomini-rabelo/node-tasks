@@ -1,5 +1,7 @@
 import { HttpStatusCode } from '@/application/http/templates/status-code'
 import app from '@/core/app'
+import { createTask, createTasks } from '@tests/factories/tasks'
+import { createUser } from '@tests/factories/users'
 import { getAuthorizationHeader } from '@tests/http/get-token'
 import '@tests/setup/mongoose'
 import { some } from '@tests/utils/some'
@@ -23,8 +25,23 @@ describe('TaskController (e2e)', () => {
 
   describe('[GET] /tasks', () => {
     it('list tasks', async () => {
+      const user = await createUser()
+      await createTasks(2, { user_id: user.id })
+
       await supertest(app)
         .get(path)
+        .set('Authorization', await getAuthorizationHeader())
+        .expect(HttpStatusCode.OK)
+    })
+  })
+
+  describe('[POST] /mark-as-done/:id', () => {
+    it('mark task as done', async () => {
+      const user = await createUser()
+      const task = await createTask({ user_id: user.id })
+
+      await supertest(app)
+        .post(`${path}/mark-as-done/${task.id}`)
         .set('Authorization', await getAuthorizationHeader())
         .expect(HttpStatusCode.OK)
     })
